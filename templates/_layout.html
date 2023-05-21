@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="static/main.css">
+    {% block customstyle %} {% endblock %}
+</head>
+<body>
+    
+    <nav class="navbar" id="navbar">
+        <div class="Logo">
+            <p>MJs</p>
+        </div>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="profile">
+                {% if session['logged_in'] %}
+                    <a href="/profile_self?id={{ session['id'] }}">Profile </a>
+                    <img src="{{ session['profile_pic'] or 'static/style-images/avatar.png' }}" alt="profile" height="34">
+                {% else %}
+                    <a href="/login">Log In</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    <div class="placeholder_navbar" id="placeholder_navbar" ></div>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script>
+        navbarelement = document.querySelector('.navbar');
+        navbarheight = navbarelement.offsetHeight;
+        document.getElementById('placeholder_navbar').style.height = navbarheight.toString() + "px";
+    </script>
+
+</body>
+</html>

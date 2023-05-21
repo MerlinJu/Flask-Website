@@ -1,0 +1,887 @@
+html {
+    font-family: 'poppins',sans-serif;
+    --bg: #D5CABD;
+    --box: #9E9488;
+    --button: #845EC2;
+    --button_hover: #976cde;
+    --navbar: #4E8397;
+    --navbar_hover: #416b7a;
+    --card_box: #9E9488;
+    --shadow: #1C1C1C;
+    --textarea: #827a6f;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+body {
+    background-color: var(--bg);
+}
+footer {
+    background-color: var(--box);
+    position: relative;
+    color: #fff;
+    height: 80px;
+    padding: 10px;
+    text-align: center;
+}
+footer p {
+    position: relative;
+    top: 20px;
+}
+
+
+
+/* Main section */
+.main-section {
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Button main styles */
+.button {
+    border-radius: 40px;
+    background: var(--button);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    transition: all 0.3s ease-in;
+    color: #FFFFFF;
+}
+.button:hover {
+    background: var(--button_hover);
+    box-shadow: 0 0 10px var(--shadow);
+}
+.message {
+    color: #ff0000;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+
+
+/* Navigationbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+    background: var(--navbar);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    min-height: 50px;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.placeholder_navbar {
+    position: relative;
+}
+
+.navbar a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 8px 30px;
+    display: block;
+}
+.Logo {
+    position: relative;
+    text-align: center;
+    min-width: 4rem;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-left: 20px;
+}
+
+@media (max-width: 30rem) {
+    .menu {
+        flex-direction: column;
+    }
+    .menu li {
+        justify-content: center;
+        padding-right: .8rem;
+    }
+}
+
+.menu li {
+    list-style: none;
+}
+.menu {
+    width: 50rem;
+    min-height: 50px;
+    display: flex;
+    justify-content: right;
+}
+.menu li:hover {
+    background-color: var(--navbar_hover);
+}
+.menu li {
+    display: flex;
+    align-items: center;
+}
+.profile img {
+    border-radius: 50%;
+    margin-right: 22px;
+    margin-left: -16px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0 0 5px var(--shadow);
+}
+
+
+
+/* Login Page */
+.login_form-box {
+    position: relative;
+    background-color: var(--card_box);
+    border-radius: 20px;
+    margin-top: -30px;
+    max-width: 52em;
+    height: 470px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.login_header {
+    font-size: 2em;
+    text-align: center;
+    color: white;
+}
+.login_inputbox {
+    position: relative;
+    background-color: transparent;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+}
+input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--card_box) inset;
+}
+.login_inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+.login_inputbox input:focus ~ label,
+.login_inputbox input:not(:placeholder-shown) ~ label{
+top: -7px;
+}
+.login_inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+.login_inputbox ion-icon {
+    position: absolute;
+    color: #fff;
+    font-size: 1.2em;
+    right: 8px;
+    top: 16px;
+}
+.wrong_info {
+    margin: -8px 0 0;
+}
+.forget {
+    color: #fff;
+    font-size: .9em;
+    margin: 25px 0 15px;
+    display: flex;
+    justify-content: space-around;
+}
+.forget input[type="checkbox"] {
+    accent-color: var(--button_hover);
+}
+.forget_container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.forget label input {
+    margin-right: 4px;
+    color: #fff;
+}
+.forget label a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 36px;
+}
+.forget label a:hover {
+    text-decoration: underline;
+}
+.login_button {
+    width: 100%;
+    height: 40px;
+}
+.register {
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+.register p a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+.register p a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+/* Signup Page */
+.signup_form-box {
+    background-color: var(--card_box);
+    border-radius: 40px;
+    height: 550px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    margin-top: -30px;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.signup_form-box::-webkit-scrollbar {
+    display: none;
+}
+.form_signup {
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.signup_header {
+    position: relative;
+    font-size: 2em;
+    margin: 42px 36px 24px;
+    color: #fff;
+    text-align: center;
+}
+.signup_inputbox {
+    position: relative;
+    background-color: transparent;
+    width: 190px;
+    margin: 20px 0;
+    border-bottom: 2px solid #fff;
+}
+.signup_inputbox label {
+    position: absolute;
+    color: #fff;
+    left: 5px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    top: 50%;
+    font-size: 1em;
+    transition: 0.3s;
+}
+.signup_inputbox input:focus ~ label,
+.signup_inputbox input:not(:placeholder-shown) ~ label{
+top: -7px;
+}
+.signup_inputbox input {
+    color: #fff;
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 35px 0 5px;
+}
+.name_inputbox {
+    width: 50%;
+}
+.signup_inputbox ion-icon {
+    position: absolute;
+    color: #fff;
+    font-size: 1.2em;
+    right: 8px;
+    top: 16px;
+}
+.signup_bday_input {
+    color: #fff;
+    width: 100%;
+    height: 50px;
+    font-size: 1em;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 35px 0 5px;
+}
+.signup_bday label {
+    color: #fff;
+    position: absolute;
+    left: 5px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    top: 50%;
+    font-size: 1em;
+    transition: 0.3s;
+}
+.signup_bday input:focus ~ label,
+.signup_bday input:not(:placeholder-shown) ~ label{
+top: -7px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+.signup_bday ion-icon {
+    color: #fff;
+    position: absolute;
+    font-size: 1.2em;
+    right: 8px;
+    top: 16px;
+}
+.signup_footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.signup_button {
+    width: 280px;
+    height: 40px;
+}
+.already {
+    font-size: .9em;
+    color: #fff;
+    text-decoration: none;
+    margin: 20px 0;
+}
+.already a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+.already a:hover {
+    text-decoration: underline;
+}
+.passwords_conf_err {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+
+
+
+/* User details */
+.user-box {
+    background: var(--card_box);
+    border-radius: 40px;
+    max-width: 52rem;
+    min-width: 20rem;
+    margin-inline: 1rem;
+    margin-top: 4rem;
+    padding: 25px 30px;
+    overflow: hidden;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.user-box::-webkit-scrollbar {
+    display: none;
+}
+.user-heading {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 10px 50px 30px;
+}
+.user-headline {
+    position: relative;
+    font-size: 1.7em;
+    color: #fff;
+    width: 260px;
+}
+.user-info_pic img{
+    position: relative;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin-right: 20px;
+    margin-left: 10px;
+    box-shadow: 0 0 10px var(--shadow);
+}
+.user-info p{
+    position: relative;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    margin: 30px 25px;
+    padding: 0 35px 0 5px;
+    width: 270px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-info label {
+    position: absolute;
+    color: #fff;
+    pointer-events: none;
+    padding: 0 35px 0 5px;
+    left: 26px;
+    font-size: 1em;
+}
+.user-info ion-icon {
+    position: absolute;
+    color: #fff;
+    font-size: 1.3em;
+    right: 30px;
+    top: 25px;
+}
+.user-info {
+    position: relative;
+}
+.user-values {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.user-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+.user-footer .edit_profile{
+    position: relative;
+    text-decoration: none;
+    width: 280px;
+    height: 40px;
+    transition: all 0.3s ease-in;
+}
+.edit_profile a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: all 0.3s ease-in;
+}
+.edit_profile:hover {
+    background: var(--button_hover);
+}
+.log_out-text {
+    position: relative;
+    margin: 20px 0 10px 0;
+    text-align: center;
+    color: #fff;
+    font-size: .9em;
+}
+.log_out-text a {
+    font-weight: 700;
+    text-decoration: none;
+    color: #ff0000;
+}
+.log_out-text a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+/* Edit Page */
+.user-info input {
+    position: relative;
+    color: #fff;
+    background: transparent;
+    margin: 30px 25px;
+    padding: 0 35px 0 5px;
+    width: 270px;
+    height: 30px;
+    font-size: 1em;
+    outline: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    text-overflow: ellipsis;
+}
+.user-edit-heading-username {
+    display: flex;
+}
+.user-headline-input {
+    position: relative;
+    color: #fff;
+    font-size: 1.7em;
+    font-weight: bolder;
+    background: transparent;
+    outline: none;
+    border: none;
+}
+.user-footer .update_profile {
+    position: relative;
+    text-decoration: none;
+    width: 280px;
+    height: 40px;
+}
+.at_sign {
+    max-width: 23px;
+    font-size: 1.7em;
+    font-weight: bolder;
+
+}
+.user-edit-heading {
+    position: relative;
+}
+.user-headline-username {
+    margin-left: 3.3px;
+}
+
+
+
+
+/* home page */
+.home_head_section {
+    position: relative;
+    height: 350px;
+    width: 100%;
+    padding: 20px;
+}
+.home_new_head {
+    height: 40%;
+    width: 100%;
+}
+.home_new_headertext {
+    position: relative;
+    left: 70px;
+    top: 60px;
+    width: 640px;
+    color: #fff;
+    font-size: 3em;
+    font-weight: 500;
+}
+
+/* Report */
+.daily_report {
+    height: 100%;
+    width: 100%;
+    overflow: none;
+}
+.daily_report h2 {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2.3em;
+    padding: 22px 12px 28px;
+}
+.report_blocks_container {
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+.report_block {
+    width: 22%;
+    text-align: center;
+    background-color: var(--box);
+    border-radius: 20px;
+    margin: 0 30px;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.report_block h3 {
+    margin: 18px 6px 2px;
+}
+.report_block ion-icon {
+    font-size: 2.3em;
+    color: #FFFFFF;
+    padding: 30px;
+}
+
+/* create_post */
+.home_mid_section {
+    position: relative;
+    padding: 20px 0;
+    height: 3000px;
+}
+.posts_heading {
+    position: relative;
+    float: left;
+    height: 300px;
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+.post_self_block {
+    background-color: var(--box);
+    height: 250px;
+    width: 85%;
+    border-radius: 20px;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.post_self {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+}
+.profile_image_self {
+    padding: 20px;
+}
+.profile_image_self img {
+    position: relative;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0 0 10px var(--shadow);
+}
+.post_form_value {
+    width: 100%;
+    padding: 23px 30px 20px 0;
+}
+.post_form_value form {
+    height: 230px;
+}
+.post_form_value textarea {
+    position: relative;
+    background-color: var(--textarea);
+    color: #FFFFFF;
+    outline: none;
+    border: none;
+    font-size: .9em;
+    border-radius: 9px;
+    width: 100%;
+    height: 60%;
+    padding: 10px 5px;
+    box-shadow: 0 0 8px var(--shadow);
+}
+.post_form_value textarea::-webkit-input-placeholder {
+    color: #fff;
+}
+.post_form_value textarea:focus {
+    box-shadow: 0 0 13px var(--shadow);
+    outline: #1C1C1C;
+}
+.post_form_value_footer {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 27%;
+    position: relative;
+}
+.characters_counter {
+    color: #FFFFFF;
+    font-size: 1em;
+    margin: 20px;
+}
+.post_create {
+    width: 100px;
+    height: 40px;
+}
+.posts_side {
+    position: relative;
+    float: right;
+    width: 35%;
+    height: 700px;
+    padding: 0 46px 0 14px;
+}
+.suggested_accounts_box {
+    position: relative;
+    background-color: var(--box);
+    border-radius: 20px;
+    height: 100%;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.posts_side h3 {
+    color: #FFFFFF;
+    font-size: 1.3em;
+    height: 40px;
+    padding: 16px 14px 10px 20px;
+}
+.posts_side .suggested_accounts {
+    padding: 20px;
+}
+.posts_section {
+    position: relative;
+    float: left;
+    height: 280px;
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+.posts_block {
+    background-color: var(--box);
+    height: 400px;
+    width: 85%;
+    border-radius: 20px;
+    box-shadow: 0 0 20px var(--shadow);
+}
+.posts {
+    padding: 10px;
+}
+
+
+
+
+
+/* CONTACT Page */
+.faq-section {
+    height: 900px;
+    padding: 20px;
+}
+.faq-header {
+    width: 100%;
+    margin: 20px 0;
+}
+.faq-header h1 {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 2em;
+}
+.faq-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.faq-element {
+    position: relative;
+    display: block;
+    border: 4px solid var(--box);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.faq-element-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+}
+.faq-question {
+    cursor: pointer;
+    font-weight: bold;
+}
+.faq-element ion-icon {
+    position: relative;
+    font-size: 1em;
+}
+.faq-answer {
+    margin: 10px;
+    display: none;
+}
+
+
+
+.ticket-form_section {
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.ticket-form_box {
+    background-color: var(--card_box);
+    width: 80%;
+    height: 90%;
+    padding: 20px;
+    box-shadow: 0 0 20px var(--shadow);
+    border-radius: 20px;
+}
+.ticket-form_head {
+    margin:  0 10px 20px;
+    position: relative;
+}
+.ticket-form_head a {
+    font-style: none;
+    color: var(--navbar);
+    text-decoration: underline;
+    transition: 0.2s ease-in;
+}
+.ticket-form_head a:hover {
+    color: var(--navbar_hover);
+}
+.ticket-form_box h2 {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+.ticket-form_box h5 {
+    text-align: left;
+    color: var(--navbar);
+    font-size: 1em;
+}
+.ticket-form-value {
+    height: 380px;
+    overflow: hidden;
+    padding: 30px 16px;
+}
+.ticket-form-value form {
+    width: 100%;
+    height: 100%;
+}
+.form_head {
+    margin-bottom: 32px;
+    position: relative;
+    height: 60px;
+}
+.contact_inputbox {
+    position: relative;
+    width: 45%;
+}
+.contact_textarea {
+    position: relative;
+    width: 100%;
+}
+.ticket-form-value input {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    outline: 4px solid var(--navbar);
+    height: 40px;
+    color: #FFFFFF;
+    padding: 0 10px;
+    font-size: 1em;
+    width: 100%;
+}
+.ticket-form-value textarea {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    outline: 4px solid var(--navbar);
+    width: 100%;
+    height: 140px;
+    color: #FFFFFF;
+    padding: 12px 10px;
+    font-size: 1em;
+}
+.ticket-form-value label {
+    display: inline-block;
+    color: #FFFFFF;
+    position: absolute;
+    top: -13px;
+    left: 11px;
+    padding: 0 5px;
+    background-color: var(--card_box);
+    text-align: center;
+}
+.contact_box_footer {
+    padding: 20px 8px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.contact_button {
+    width: 160px;
+    height: 40px;
+    margin-left: 20px;
+}

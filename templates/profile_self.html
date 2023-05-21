@@ -1,0 +1,62 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<section class="main-section main-section_card">
+    <div class="user-box">
+        <div class="user-heading">
+            <div class="user-info_pic">
+                <img src="{{ result['profile_pic'] or 'static/style-images/avatar.png' }}" alt="profile" height="78">
+            </div>
+            <h2 class="user-headline">@{{ result['username'] }}</h2>
+        </div>
+
+        <div class="user-values">
+
+            <div class="user-info">
+                <ion-icon name="text-outline"></ion-icon>
+                <label for="">First name</label>
+                <p>{{ result['fname'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="text-outline"></ion-icon>
+                <label for="">Last name</label>
+                <p>{{ result['lname'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="mail-outline"></ion-icon>
+                <label for="">Email</label>
+                <p>{{ result['email'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <label for="">Password</label>
+                <p>{{ result['password'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <label for="">Birthday</label>
+                <p>{{ result['birthday'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <label for="">User since</label>
+                <p>{{ result['acc_creation'] }}</p>
+            </div>
+
+
+        </div>
+
+        <div class="user-footer">
+            <button class="button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
+            <div class="log_out-text">
+                <p>Want to logout? <a href="/logout">Log Out</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+{% endblock %}

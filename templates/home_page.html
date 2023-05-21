@@ -1,0 +1,106 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<section class="main-section">
+    {% if session['logged_in'] %}
+    <div class="home_head_section">
+        <div class="daily_report">
+            <h2>Daily Report</h2>
+            <div class="report_blocks_container">
+                <div class="new_messages report_block">
+                    <h3>New Messages</h3>
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                </div>
+                <div class="Connections report_block">
+                    <h3>Connected</h3>
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                <div class="Team Builder report_block">
+                    <h3>Team Builder</h3>
+                    <ion-icon name="game-controller-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="home_mid_section">
+        <div class="posts_heading">
+            <div class="post_self_block">
+                <div class="post_self">
+                    <div class="profile_image_self">
+                        <img src="{{ session['profile_pic'] or 'static/style-images/avatar.png' }}" height="60" alt="profile">
+                    </div>
+                    <div class="post_form_value">
+                        <form>
+                            <textarea type="text" id="text" placeholder="Enter your text here..." maxlength="250" required></textarea>
+                            <div class="post_form_value_footer">
+                                <p class="characters_counter"><span id="counter">250</span></p>
+                                <button class="button post_create" type="submit" name="Value">Post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="posts_side">
+            <div class="suggested_accounts_box">
+                <h3>Who to follow?</h3>
+                <div class="suggested_accounts">
+                    <p>test</p>
+                </div>
+            </div>
+        </div>
+        <div class="posts_section">
+            <div class="posts_block">
+                <div class="posts">
+
+                    <!-- {% for posts in _posts %}
+
+                    {% endfor %} -->
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    {% else %}
+        <section class="main-section">
+            <div class="home_new_head">
+                <h1 class="home_new_headertext">The new Way of finding your future proffesional teammates</h1>
+            </div>
+        </section>
+
+
+    {% endif %}
+        
+
+
+</section>
+
+<footer>
+    <p>&copy; 2023 MJs Website. All rights reserved</p>
+</footer>
+
+
+<script>
+
+    const textarea = document.getElementById('text');
+    const counter = document.getElementById('counter');
+
+    textarea.addEventListener('input', function() {
+        const maxlength = parseInt(textarea.getAttribute('maxlength'));
+        const currentlength = textarea.value.length;
+        const remaininglength = maxlength - currentlength;
+
+        counter.textContent = remaininglength;
+
+    });
+
+
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+{% endblock %}
