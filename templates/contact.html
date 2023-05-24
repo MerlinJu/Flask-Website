@@ -12,8 +12,8 @@
             <div class="faq-element">
                 <div class="faq-element-main">
                     <div class="faq-question">Q: How does this service work?</div>
-                    <ion-icon class="drop-down" name="chevron-down-outline"></ion-icon>
-                    <ion-icon class="drop-up" name="chevron-up-outline"></ion-icon>
+                    <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
+                    <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
                 A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pretium tortor sit amet justo ultrices
@@ -23,8 +23,8 @@
             <div class="faq-element">
                 <div class="faq-element-main">
                     <div class="faq-question">Q: Can I cancel my subscription anytime?</div>
-                    <ion-icon class="drop-down" name="chevron-down-outline"></ion-icon>
-                    <ion-icon class="drop-up" name="chevron-up-outline"></ion-icon>
+                    <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
+                    <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
                 A: Yes, you can cancel your subscription at any time. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -34,8 +34,8 @@
             <div class="faq-element">
                 <div class="faq-element-main">
                     <div class="faq-question">Q: What payment methods do you accept?</div>
-                    <ion-icon class="drop-down" name="chevron-down-outline"></ion-icon>
-                    <ion-icon class="drop-up" name="chevron-up-outline"></ion-icon>
+                    <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
+                    <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
                 A: We accept all major credit cards and PayPal. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -105,7 +105,16 @@
     });
 
 
-    const faqQuestions = document.querySelectorAll('.faq-question'); 
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    const dropdown = document.getElementById('drop-down'); 
+    const dropup = document.getElementById('drop-up');
+
+    var elems = document.getElementsByClassName('drop-up');
+    for (var i=0;i<elems.length;i+=1) {
+        console.log(elems[i]);
+        elems[i].style.display = 'none';
+    }
 
     faqQuestions.forEach((question) => {
         question.addEventListener('click', () => {
@@ -113,13 +122,23 @@
         let element = question.parentElement;
         answer = element.nextElementSibling; 
         answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        // let step = 0; step < 5; step++
+ 
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        dropup.style.display = dropup.style.display === 'none' ? 'block' : 'none';
 
-        const dropup = document.querySelectorAll('.drop-up');
-        const dropdown = document.querySelectorAll('.drop-down');  
+
         
 
-        dropup.style.display = dropup.style.display === 'block' ? 'none' : 'block';
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        // if (dropup.style.display == 'none') {
+        //     dropdown.style.display = 'block';
+        // }
+        // else {
+        //     dropdown.style.display = 'none';
+        // }
+        
+        // dropup.style.display = dropup.style.display === 'block' ? 'none' : 'block';
+        // dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 
         });
     });
