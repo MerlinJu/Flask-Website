@@ -11,35 +11,48 @@
 
             <div class="faq-element">
                 <div class="faq-element-main">
-                    <div class="faq-question">Q: How does this service work?</div>
+                    <div class="faq-question">Q: What is this app for?</div>
                     <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
                     <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
-                A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pretium tortor sit amet justo ultrices
-                suscipit. Phasellus tempus nisl non mi aliquet, vitae rhoncus lectus facilisis.
+                    A: This App is made for gamers or other partys that are participating in the area of E-sports, which can be the Team Members, Coaches, Organizers and more. 
                 </div>
             </div>
+
             <div class="faq-element">
                 <div class="faq-element-main">
-                    <div class="faq-question">Q: Can I cancel my subscription anytime?</div>
+                    <div class="faq-question">Q: Can normal Gamers use this App as well?</div>
                     <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
                     <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
-                A: Yes, you can cancel your subscription at any time. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse pretium tortor sit amet justo ultrices suscipit. Phasellus tempus nisl non mi aliquet.
+                A: Yes, you can use this App even if you do not want to participate in Tournaments or want to get into E-sports.
+                But it is required for you in this context to mention this is you Account Information to help other people with their search.
+                 
                 </div>
             </div>
+
             <div class="faq-element">
                 <div class="faq-element-main">
-                    <div class="faq-question">Q: What payment methods do you accept?</div>
+                    <div class="faq-question">Q: Do you offer any payed Subscriptions?</div>
                     <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
                     <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
                 </div>
                 <div class="faq-answer">
-                A: We accept all major credit cards and PayPal. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse pretium tortor sit amet justo ultrices suscipit. Phasellus tempus nisl non mi aliquet.
+                A: We do not offer any Premium Subscriptions yet.
+                </div>
+            </div>
+
+            <div class="faq-element">
+                <div class="faq-element-main">
+                    <div class="faq-question">Q: Can I use this App without an Account?</div>
+                    <ion-icon id="drop-down" class="drop-down" name="chevron-down-outline"></ion-icon>
+                    <ion-icon id="drop-up" class="drop-up" name="chevron-up-outline"></ion-icon>
+                </div>
+                <div class="faq-answer">
+                A: No, we strictly forbid users without an registered Account to use any of our Services.
+                This is because the Users on this App are searching for serious reasons and to prevent any trolling or other inappropriate behaviour from non-registred accounts.
                 </div>
             </div>
             
@@ -99,49 +112,33 @@
         const maxlength = parseInt(textarea.getAttribute('maxlength'));
         const currentlength = textarea.value.length;
         const remaininglength = maxlength - currentlength;
-
         counter.textContent = remaininglength;
-
     });
 
 
     const faqQuestions = document.querySelectorAll('.faq-question');
+    const dropups = document.getElementsByClassName('drop-up');
 
-    const dropdown = document.getElementById('drop-down'); 
-    const dropup = document.getElementById('drop-up');
-
-    var elems = document.getElementsByClassName('drop-up');
-    for (var i=0;i<elems.length;i+=1) {
-        console.log(elems[i]);
-        elems[i].style.display = 'none';
+    for (var i = 0; i < dropups.length; i += 1) {
+        dropups[i].style.display = 'none';
     }
 
     faqQuestions.forEach((question) => {
+        var dropdown = question.parentElement;
+        dropdown = dropdown.querySelector('.drop-down');
+        var dropup = question.parentElement;
+        dropup = dropup.querySelector('.drop-up');
+        var answer = question.parentElement;
+        var answer = answer.nextElementSibling;
+        
         question.addEventListener('click', () => {
-        question.classList.toggle('active');
-        let element = question.parentElement;
-        answer = element.nextElementSibling; 
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-        // let step = 0; step < 5; step++
- 
-        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-        dropup.style.display = dropup.style.display === 'none' ? 'block' : 'none';
-
-
-        
-
-        // if (dropup.style.display == 'none') {
-        //     dropdown.style.display = 'block';
-        // }
-        // else {
-        //     dropdown.style.display = 'none';
-        // }
-        
-        // dropup.style.display = dropup.style.display === 'block' ? 'none' : 'block';
-        // dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-
-        });
+            question.classList.toggle('active');
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            dropup.style.display = dropup.style.display === 'none' ? 'block' : 'none';
     });
+});
+
 
 
 
