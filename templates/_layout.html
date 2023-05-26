@@ -37,7 +37,13 @@
     <script>
         navbarelement = document.querySelector('.navbar');
         navbarheight = navbarelement.offsetHeight;
-        document.getElementById('placeholder_navbar').style.height = navbarheight.toString() + "px";
+        var placeholdernavbar = document.getElementById('placeholder_navbar');
+        if (navbarheight != 50) {
+            placeholdernavbar.style.height = navbarheight.toString() + "px";
+        }
+        else {
+            placeholdernavbar.style.height = "50px";
+        }
     </script>
 
 </body>

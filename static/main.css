@@ -406,6 +406,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: hidden;
     box-shadow: 0 0 20px var(--shadow);
 }
+@media (max-width: 731px) {
+    .user-box {
+        width: 30rem;
+    }
+}
+
 .user-box::-webkit-scrollbar {
     display: none;
 }
@@ -762,8 +768,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     display: block;
     border: 4px solid var(--box);
+    background-color: var(--card_box);
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 .faq-element-main {
     display: flex;
