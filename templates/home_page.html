@@ -28,7 +28,7 @@
             <div class="post_self_block">
                 <div class="post_self">
                     <div class="profile_image_self">
-                        <img src="{{ session['profile_pic'] or 'static/style-images/avatar.png' }}" height="60" alt="profile">
+                        <img src="{{ session['profile_pic'] or 'images/style-images/avatar.png' }}" height="60" alt="profile">
                     </div>
                     <div class="post_form_value">
                         <form>
@@ -46,7 +46,12 @@
             <div class="suggested_accounts_box">
                 <h3>Who to follow?</h3>
                 <div class="suggested_accounts">
-                    <p>test</p>
+                    {% for accs in allusers %}
+                        <div class="account_box">
+                            <a href="#" >{{ accs['username'] }}</p>
+                        </div>
+
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -82,23 +87,6 @@
     <p>&copy; 2023 MJs Website. All rights reserved</p>
 </footer>
 
-
-<script>
-
-    const textarea = document.getElementById('text');
-    const counter = document.getElementById('counter');
-
-    textarea.addEventListener('input', function() {
-        const maxlength = parseInt(textarea.getAttribute('maxlength'));
-        const currentlength = textarea.value.length;
-        const remaininglength = maxlength - currentlength;
-
-        counter.textContent = remaininglength;
-
-    });
-
-
-</script>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

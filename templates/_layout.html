@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/css/main.css">
     {% block customstyle %} {% endblock %}
 </head>
 <body>
@@ -20,7 +20,7 @@
             <li class="profile">
                 {% if session['logged_in'] %}
                     <a href="/profile_self?id={{ session['id'] }}">Profile </a>
-                    <img src="{{ session['profile_pic'] or 'static/style-images/avatar.png' }}" alt="profile" height="34">
+                    <img src="{{ session['profile_pic'] or 'static/images/style-images/avatar.png' }}" alt="profile" height="34">
                 {% else %}
                     <a href="/login">Log In</a>
                 {% endif %}
@@ -34,17 +34,8 @@
         {% endblock %}
     </main>
 
-    <script>
-        navbarelement = document.querySelector('.navbar');
-        navbarheight = navbarelement.offsetHeight;
-        var placeholdernavbar = document.getElementById('placeholder_navbar');
-        if (navbarheight != 50) {
-            placeholdernavbar.style.height = navbarheight.toString() + "px";
-        }
-        else {
-            placeholdernavbar.style.height = "50px";
-        }
-    </script>
+<script src="static/js/index.js"></script>
+
 
 </body>
 </html>

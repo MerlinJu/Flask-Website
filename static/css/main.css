@@ -46,6 +46,11 @@ footer p {
     justify-content: center;
     align-items: center;
 }
+@media (max-width: 30rem) {
+    .main-section_card {
+        position: static;
+    }
+}
 
 
 /* Button main styles */
@@ -399,11 +404,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: var(--card_box);
     border-radius: 40px;
     max-width: 52rem;
-    min-width: 20rem;
+    min-width: 18rem;
+    height: 34rem;
     margin-inline: 1rem;
-    margin-top: 4rem;
     padding: 25px 30px;
-    overflow: hidden;
+    overflow: scroll;
     box-shadow: 0 0 20px var(--shadow);
 }
 @media (max-width: 731px) {
@@ -717,12 +722,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .posts_side h3 {
     color: #FFFFFF;
     font-size: 1.3em;
-    height: 40px;
     padding: 16px 14px 10px 20px;
 }
 .posts_side .suggested_accounts {
-    padding: 20px;
+    padding: 6px 20px;
 }
+.account_box {
+    border-radius: 8px;
+    height: 2rem;
+    margin-bottom: 8px;
+    padding: 5px 9px;
+    background-color: var(--textarea);
+}
+.account_box a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.account_box a:hover {
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+
 .posts_section {
     position: relative;
     float: left;

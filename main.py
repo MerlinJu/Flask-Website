@@ -17,6 +17,14 @@ def create_connection():
         cursorclass=pymysql.cursors.DictCursor
     )
 
+def getall_users():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM users"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+    return result
+
 @app.route('/')
 def main_page():
     if 'logged_in' in session:
@@ -28,7 +36,8 @@ def main_page():
                 )
                 cursor.execute(sql, values)
                 result = cursor.fetchone()
-        return render_template('home_page.html', result=result)
+                allusers = getall_users()
+        return render_template('home_page.html', result=result ,allusers = allusers)
     else:
         return render_template('home_page.html')
 
