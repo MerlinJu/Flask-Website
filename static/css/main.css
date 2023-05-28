@@ -9,6 +9,9 @@ html {
     --card_box: #9E9488;
     --shadow: #1C1C1C;
     --textarea: #827a6f;
+    --section: #b9b0a4;
+    --section2: #c8bfb4;
+
 }
 * {
     margin: 0;
@@ -18,6 +21,7 @@ html {
 }
 body {
     background-color: var(--bg);
+    overscroll-behavior: none;
 }
 footer {
     background-color: var(--box);
@@ -490,7 +494,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .edit_profile a {
     text-decoration: none;
-    color: black;
+    color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -917,4 +921,60 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 160px;
     height: 40px;
     margin-left: 20px;
+}
+
+
+
+/* Settings page */
+.settings_tabs_section {
+    position: relative;
+    width: 40%;
+    padding-top: 40px;
+    background-color: var(--section);
+    border-right: 2px solid #afaba2;
+    font-weight: 600;
+    font-size: 1.3em;
+    float: left;
+    height: 800px;
+}
+.settings_tabs_section h2 {
+    padding-left: 34px;
+    font-size: 1.8em;
+    margin-bottom: 30px;
+}
+.settings_tabs {
+    padding: 10px;
+}
+.settings_tab {
+    display: flex;
+    margin-bottom: 10px;
+    height: fit-content;
+}
+.settings_tab ion-icon {
+    margin-right: 11px;
+    position: relative;
+    flex-shrink: 0;
+}
+@media (max-width: 30rem) {
+    .settings_tabs_section h2 {
+        font-size: 1.3em;
+        padding-left: 14px;
+    }
+    .settings_tabs_section p {
+        font-size: .7em;
+    }
+}
+
+
+
+
+.tabs_information_section {
+    position: relative;
+    width: 60%;
+    padding-top: 40px;
+    background-color: var(--section2);
+    font-weight: 600;
+    font-size: 1.3em;
+    float: right;
+    height: 800px;
 }

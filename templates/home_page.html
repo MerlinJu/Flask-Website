@@ -47,10 +47,13 @@
                 <h3>Who to follow?</h3>
                 <div class="suggested_accounts">
                     {% for accs in allusers %}
-                        <div class="account_box">
-                            <a href="#" >{{ accs['username'] }}</p>
-                        </div>
-
+                        {% if loop.index <= 16 %}
+                            <div class="account_box">
+                                <a href="#" >{{ accs['username'] }}</p>
+                            </div>
+                        {% else %}
+                            <!-- do nothing... -->
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

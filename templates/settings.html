@@ -3,7 +3,67 @@
 {% block content %}
 
 <section class="main-section">
-    <p>Settings page</p>
+    <div class="settings_tabs_section">
+        <h2>Settings</h2>
+        <div class="settings_tabs">
+            <div class="settings_tab">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                <p>Personal Information</p>
+            </div>
+            <div class="settings_tab">
+                <ion-icon name="key-outline"></ion-icon>
+                <p>Password & Security</p>
+            </div>
+            <div class="settings_tab">
+                <ion-icon name="invert-mode-outline"></ion-icon>                  
+                <p>Appearance</p>
+            </div>
+            <div class="settings_tab">
+                <ion-icon name="globe-outline"></ion-icon>
+                <p>Language</p>
+            </div>
+            <div class="settings_tab">
+                <ion-icon name="exit-outline"></ion-icon>
+                <p>Log out</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tabs_information_section">
+        <div id="tabs_information" class="tabs_information">
+            <div class="personal_information_information tab_information">
+                <h2>Personal Information</h2>
+
+
+
+            </div>
+
+            <div class="Password_Security_information tab_information">
+                <h2>Password & Security</h2>
+                
+            </div>
+
+            <div class="Appearance_information tab_information">
+                <h2>Appearance</h2>
+                
+            </div>
+
+            <div class="Language_information tab_information">
+                <h2>Language</h2>
+                
+            </div>
+        </div>
+
+    </div>
+
+    
+
 </section>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 {% endblock %}

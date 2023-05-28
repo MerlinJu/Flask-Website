@@ -17,6 +17,13 @@
         <ul class="menu">
             <li><a href="/">Home</a></li>
             <li><a href="/contact">Contact</a></li>
+            <li>
+                {% if session['logged_in'] %}
+                    <a href="/settings">Settings</a> 
+                {% else %}
+                    <!-- nothing -->
+                {% endif %}
+            </li>
             <li class="profile">
                 {% if session['logged_in'] %}
                     <a href="/profile_self?id={{ session['id'] }}">Profile </a>

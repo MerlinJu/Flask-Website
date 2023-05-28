@@ -1,6 +1,5 @@
 console.log('running');
 
-
 // placeholder navbar
 navbarelement = document.querySelector('.navbar');
 var placeholdernavbar = document.getElementById('placeholder_navbar');
@@ -20,19 +19,20 @@ updateplaceholdernavbar();
 window.addEventListener('resize', updateplaceholdernavbar);
 
 
-
 // textarea counter homepage
 const textarea = document.getElementById('text');
 const counter = document.getElementById('counter');
 
-textarea.addEventListener('input', function() {
-    const maxlength = parseInt(textarea.getAttribute('maxlength'));
-    const currentlength = textarea.value.length;
-    const remaininglength = maxlength - currentlength;
+if (textarea && counter) {
+    textarea.addEventListener('input', function() {
+        const maxlength = parseInt(textarea.getAttribute('maxlength'));
+        const currentlength = textarea.value.length;
+        const remaininglength = maxlength - currentlength;
 
-    counter.textContent = remaininglength;
+        counter.textContent = remaininglength;
 
-});
+    });
+}
 
 
 // FAQ Dropdowns contact
@@ -56,5 +56,24 @@ faqQuestions.forEach((question) => {
         answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
         dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
         dropup.style.display = dropup.style.display === 'none' ? 'block' : 'none';
+    });
 });
+
+
+// Settings page informations
+const settingstabs = document.querySelectorAll('.settings_tab');
+const infos = document.querySelectorAll('.tab_information');
+
+settingstabs.forEach((tab, index) => {
+    var info = infos[index];
+    info.style.display = 'none';
+    infos[0].style.display = 'block'
+
+
+    tab.addEventListener('click', () => {
+        infos.forEach((info) => {
+            info.style.display = 'none';
+        });
+        infos[index].style.display = 'block';
+    });
 });
