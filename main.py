@@ -110,7 +110,40 @@ def contact():
 
 @app.route('/settings')
 def settings():
-    return render_template('/settings.html')
+    if request.method == 'POST':
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql = """UPDATE users SET
+                fname = %s,
+                lname = %s,
+                email = %s,
+                birthday = %s,
+                phonenumber = %s
+                WHERE id = %s
+                """
+                values = (
+                    request.form['fname'],
+                    request.form['lname'],
+                    request.form['email'],
+                    request.form['birthday'],
+                    request.form['phonenumber'],
+                    session['id']
+                )
+                cursor.execute(sql, values)
+                connection.commit()
+        return redirect('/settings.html')
+    else:
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql = "SELECT * FROM users WHERE id = %s"
+                values = (
+                    session['id']
+                )
+                cursor.execute(sql, values)
+                result = cursor.fetchone()
+                return render_template('/settings.html', result=result)
+
+
 
 @app.route('/profile_self')
 def account_details():

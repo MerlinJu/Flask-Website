@@ -11,7 +11,11 @@ html {
     --textarea: #827a6f;
     --section: #b9b0a4;
     --section2: #c8bfb4;
-
+    --black: #000;
+    --white: #FFFFFF;
+    --border: #afaba2;
+    --lightblack: #686868;
+    
 }
 * {
     margin: 0;
@@ -67,7 +71,7 @@ footer p {
     font-size: 1em;
     font-weight: 700;
     transition: all 0.3s ease-in;
-    color: #FFFFFF;
+    color: var(--white);
 }
 .button:hover {
     background: var(--button_hover);
@@ -77,6 +81,31 @@ footer p {
     color: #ff0000;
     font-weight: 600;
     font-size: 1.1em;
+    text-align: center;
+}
+
+
+
+/* Inputbox */
+.inputbox {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    outline: 4px solid var(--navbar);
+    height: 40px;
+    color: var(--white);
+    padding: 0 10px;
+    font-size: 1em;
+    width: 100%;
+}
+.inputbox_parent label {
+    display: inline-block;
+    color: var(--white);
+    position: absolute;
+    top: -13px;
+    left: 11px;
+    padding: 0 5px;
+    background-color: var(--card_box);
     text-align: center;
 }
 
@@ -101,7 +130,7 @@ footer p {
 }
 
 .navbar a {
-    color: #FFFFFF;
+    color: var(--white);
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 400;
@@ -405,6 +434,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* User details */
 .user-box {
+    position: relative;
     background: var(--card_box);
     border-radius: 40px;
     max-width: 52rem;
@@ -418,6 +448,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (max-width: 731px) {
     .user-box {
         width: 30rem;
+        height: 28rem;
+        top: -62px;
     }
 }
 
@@ -429,6 +461,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: left;
     align-items: center;
     margin: 10px 50px 30px;
+}
+@media (max-width: 731px) {
+    .user-heading {
+        margin: 10px 0 30px;
+    }
 }
 .user-headline {
     position: relative;
@@ -456,6 +493,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+@media (max-width: 731px) {
+    .user-info p {
+        width: 240px;
+    }
 }
 .user-info label {
     position: absolute;
@@ -492,9 +534,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 40px;
     transition: all 0.3s ease-in;
 }
+@media (max-width: 731px) {
+    .user-footer .edit_profile{
+        width: 220px;
+    }
+}
 .edit_profile a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -601,13 +648,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: none;
 }
 .daily_report h2 {
-    color: #FFFFFF;
+    color: var(--white);
     text-align: center;
     font-size: 2.3em;
     padding: 22px 12px 28px;
 }
 .report_blocks_container {
-    color: #FFFFFF;
+    color: var(--white);
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
@@ -625,7 +672,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .report_block ion-icon {
     font-size: 2.3em;
-    color: #FFFFFF;
+    color: var(--white);
     padding: 30px;
 }
 
@@ -676,7 +723,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .post_form_value textarea {
     position: relative;
     background-color: var(--textarea);
-    color: #FFFFFF;
+    color: var(--white);
     outline: none;
     border: none;
     font-size: .9em;
@@ -701,7 +748,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
 }
 .characters_counter {
-    color: #FFFFFF;
+    color: var(--white);
     font-size: 1em;
     margin: 20px;
 }
@@ -724,7 +771,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     box-shadow: 0 0 20px var(--shadow);
 }
 .posts_side h3 {
-    color: #FFFFFF;
+    color: var(--white);
     font-size: 1.3em;
     padding: 16px 14px 10px 20px;
 }
@@ -740,11 +787,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .account_box a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: var(--white);
 }
 .account_box a:hover {
     text-decoration: underline;
-    color: #FFFFFF;
+    color: var(--white);
 }
 
 
@@ -782,7 +829,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .faq-header h1 {
     text-align: center;
-    color: #FFFFFF;
+    color: var(--white);
     font-size: 2em;
 }
 .faq-container {
@@ -848,7 +895,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .ticket-form_box h2 {
     text-align: center;
-    color: #FFFFFF;
+    color: var(--white);
     font-size: 2.2em;
     margin-bottom: 10px;
 }
@@ -879,17 +926,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     width: 100%;
 }
-.ticket-form-value input {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-    outline: 4px solid var(--navbar);
-    height: 40px;
-    color: #FFFFFF;
-    padding: 0 10px;
-    font-size: 1em;
-    width: 100%;
-}
 .ticket-form-value textarea {
     background-color: transparent;
     border: none;
@@ -897,19 +933,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     outline: 4px solid var(--navbar);
     width: 100%;
     height: 140px;
-    color: #FFFFFF;
+    color: var(--white);
     padding: 12px 10px;
     font-size: 1em;
-}
-.ticket-form-value label {
-    display: inline-block;
-    color: #FFFFFF;
-    position: absolute;
-    top: -13px;
-    left: 11px;
-    padding: 0 5px;
-    background-color: var(--card_box);
-    text-align: center;
 }
 .contact_box_footer {
     padding: 20px 8px;
@@ -928,10 +954,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Settings page */
 .settings_tabs_section {
     position: relative;
-    width: 40%;
+    width: 35%;
     padding-top: 40px;
     background-color: var(--section);
-    border-right: 2px solid #afaba2;
+    border-right: 2px solid var(--border);
     font-weight: 600;
     font-size: 1.3em;
     float: left;
@@ -943,12 +969,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 30px;
 }
 .settings_tabs {
-    padding: 10px;
+    padding: 10px 20px;
 }
 .settings_tab {
+    position: relative;
     display: flex;
     margin-bottom: 10px;
     height: fit-content;
+    align-items: center;
 }
 .settings_tab ion-icon {
     margin-right: 11px;
@@ -960,8 +988,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         font-size: 1.3em;
         padding-left: 14px;
     }
-    .settings_tabs_section p {
-        font-size: .7em;
+    .settings_tabs_section {
+        font-size: .8em;
+    }
+    .settings_tabs {
+        padding-left: 10px;
     }
 }
 
@@ -970,11 +1001,60 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .tabs_information_section {
     position: relative;
-    width: 60%;
-    padding-top: 40px;
+    width: 65%;
+    padding: 40px 20px;
     background-color: var(--section2);
     font-weight: 600;
     font-size: 1.3em;
     float: right;
     height: 800px;
+}
+.sector_hr {
+    border: .5px solid var(--border);
+    margin-bottom: 20px;
+    width: 80%;
+}
+.settings_tabs_hr {
+    border: 1px solid var(--border);
+    margin-left: 20px;
+    margin-bottom: 4px;
+}
+.personal_information_information h2 {
+    margin-bottom: 28px;
+}
+.personal_information_information h3 {
+    margin-bottom: 10px;
+}
+.personal_information_information h6 {
+    margin-bottom: 32px;
+    color: var(--lightblack);
+}
+
+.personal_information_form {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+@media (max-width: 761px) {
+    .personal_information_form {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .settings_inputbox {
+        width: 80%;
+    }
+}
+
+.settings_inputbox {
+    position: relative;
+    font-size: .9em;
+}
+.settings_inputbox .inputbox {
+    color: var(--black);
+    font-size: .9em;
+}
+.settings_inputbox label {
+    background-color: var(--section2);
+    color: var(--black);
 }

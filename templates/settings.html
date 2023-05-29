@@ -5,6 +5,7 @@
 <section class="main-section">
     <div class="settings_tabs_section">
         <h2>Settings</h2>
+        <hr class="sector_hr settings_tabs_hr">
         <div class="settings_tabs">
             <div class="settings_tab">
                 <ion-icon name="person-circle-outline"></ion-icon>
@@ -32,12 +33,35 @@
     </div>
     <div class="tabs_information_section">
         <div id="tabs_information" class="tabs_information">
+
+
             <div class="personal_information_information tab_information">
                 <h2>Personal Information</h2>
+                <hr class="sector_hr">
+                <h3>Contact Info</h3>
+                <h6>This Information is used for contacting purposes and will not be displayed publicy</h5>
+                <form class="personal_information_form" method="POST">
+                    <div class="settings_inputbox inputbox_parent">
+                        <label for="">First name</label> 
+                        <input class="inputbox" type="text" name="first_name" value="{{ result['fname'] }}" required>
+                    </div>
+                    <div class="settings_inputbox inputbox_parent">
+                        <label for="">Last name</label> 
+                        <input class="inputbox" type="text" name="flast_name" value="{{ result['lname'] }}" required>
+                    </div>
+                    <div class="settings_inputbox inputbox_parent">
+                        <label for="">Email</label> 
+                        <input class="inputbox" type="email" name="email" value="{{ result['email'] }}" required>
+                    </div>
+                    <div class="settings_inputbox inputbox_parent">
+                        <label for="">Phone number</label> 
+                        <input class="inputbox" type="text" name="phonenumber" value="{{ result['phonenumber'] }}" required>
+                    </div>
 
-
-
+                </form>
             </div>
+
+
 
             <div class="Password_Security_information tab_information">
                 <h2>Password & Security</h2>

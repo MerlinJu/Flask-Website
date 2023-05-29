@@ -65,15 +65,25 @@ const settingstabs = document.querySelectorAll('.settings_tab');
 const infos = document.querySelectorAll('.tab_information');
 
 settingstabs.forEach((tab, index) => {
-    var info = infos[index];
-    info.style.display = 'none';
-    infos[0].style.display = 'block'
+    if (index < settingstabs.length - 1 ) {
+        infos[index].style.display = 'none';
+        infos[0].style.display = 'block';
+        settingstabs[0].classList.add('active');
 
 
-    tab.addEventListener('click', () => {
-        infos.forEach((info) => {
-            info.style.display = 'none';
+        tab.addEventListener('click', () => {   
+            infos.forEach((info) => {
+                info.style.display = 'none';
+            });
+            console.log(tab);
+
+            settingstabs.forEach((othertab) => {
+                othertab.classList.remove('active');
+            });
+            
+            infos[index].style.display = 'block';
+            tab.classList.add('active');
+
         });
-        infos[index].style.display = 'block';
-    });
+    }
 });
