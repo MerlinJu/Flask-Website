@@ -43,11 +43,11 @@
                 <form class="personal_information_form" method="POST">
                     <div class="settings_inputbox inputbox_parent">
                         <label for="">First name</label> 
-                        <input class="inputbox" type="text" name="first_name" value="{{ result['fname'] }}" required>
+                        <input class="inputbox" type="text" name="fname" value="{{ result['fname'] }}" required>
                     </div>
                     <div class="settings_inputbox inputbox_parent">
                         <label for="">Last name</label> 
-                        <input class="inputbox" type="text" name="flast_name" value="{{ result['lname'] }}" required>
+                        <input class="inputbox" type="text" name="lname" value="{{ result['lname'] }}" required>
                     </div>
                     <div class="settings_inputbox inputbox_parent">
                         <label for="">Email</label> 
@@ -56,6 +56,10 @@
                     <div class="settings_inputbox inputbox_parent">
                         <label for="">Phone number</label> 
                         <input class="inputbox" type="text" name="phonenumber" value="{{ result['phonenumber'] }}" required>
+                    </div>
+                    <div class="settings_information_actions">
+                        <button type="button" id="settings_cancel_personal_info" class="sec_button settings_button settings_cancel">Cancel</button>
+                        <button type="submit" class="button settings_button settings_sumbit" name="Value">Save</button>
                     </div>
 
                 </form>

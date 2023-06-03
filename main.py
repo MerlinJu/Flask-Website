@@ -3,9 +3,12 @@ import pymysql
 import datetime
 import os
 import uuid
+import datetime
 
 app = Flask(__name__)
 app.secret_key = '!SeCrEt__KeY.mERLIN13542!'
+
+DEFAULTIMG = 'static/images/style-images/avatar.png'
 
 def create_connection():
     return pymysql.connect(
@@ -25,21 +28,62 @@ def getall_users():
             result = cursor.fetchall()
     return result
 
-@app.route('/')
+def set_default_profilepic():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "UPDATE users SET profile_pic = %s WHERE email = %s"
+            values = (
+                DEFAULTIMG,
+                request.form["email"]
+            )
+            cursor.execute(sql, values)
+            connection.commit()
+            return
+
+
+
+@app.route('/', methods = ['POST', 'GET'] )
 def main_page():
     if 'logged_in' in session:
-        with create_connection() as connection:
-            with connection.cursor() as cursor:
-                sql = "SELECT * FROM users WHERE id = %s" 
-                values = ( 
-                    session['id']
-                )
-                cursor.execute(sql, values)
-                result = cursor.fetchone()
+
+        if request.method == 'POST':
+            with create_connection() as connection:
+                with connection.cursor() as cursor:
+                    sql = "INSERT INTO posts (user_id, content, post_time) VALUES (%s, %s, %s)"
+                    values = (
+                        session['id'],
+                        request.form["content"],
+                        datetime.datetime.now()
+                    )
+                    cursor.execute(sql, values)
+                    result = connection.commit()
+                    return redirect('/')
+                    
+        else:
+            with create_connection() as connection:
+                with connection.cursor() as cursor:
+                    sql = "SELECT * FROM users WHERE id = %s" 
+                    values = ( 
+                        session['id']
+                    )
+                    cursor.execute(sql, values)
+                    result = cursor.fetchone()
+
+                with connection.cursor() as cursor:
+                    sql = "SELECT * FROM posts JOIN users ON posts.user_id = users.id"
+                    cursor.execute(sql)
+                    allposts = cursor.fetchall()
+
                 allusers = getall_users()
-        return render_template('home_page.html', result=result ,allusers = allusers)
+                return render_template('home_page.html', result=result ,allposts=allposts, allusers=allusers)
+                
     else:
         return render_template('home_page.html')
+    
+@app.template_filter('format_datetime')
+def format_datetime(value, format='%Y-%m-%d %H:%M:%S'):
+    return value.strftime(format)
+
 
 @app.route('/signup', methods = ['POST', 'GET'] )
 def signup():
@@ -60,6 +104,7 @@ def signup():
                 if request.form["password"] == request.form["conf_password"]:
                     cursor.execute(sql, values)
                     connection.commit()
+                    set_default_profilepic()   #set default profile picture
                     return redirect('/')
                 else:
                     flash('Passwords not matching!')
@@ -108,7 +153,7 @@ def logout():
 def contact():
     return render_template('contact.html')
 
-@app.route('/settings')
+@app.route('/settings', methods = ["POST", "GET"])
 def settings():
     if request.method == 'POST':
         with create_connection() as connection:
@@ -117,7 +162,6 @@ def settings():
                 fname = %s,
                 lname = %s,
                 email = %s,
-                birthday = %s,
                 phonenumber = %s
                 WHERE id = %s
                 """
@@ -125,13 +169,12 @@ def settings():
                     request.form['fname'],
                     request.form['lname'],
                     request.form['email'],
-                    request.form['birthday'],
                     request.form['phonenumber'],
                     session['id']
                 )
                 cursor.execute(sql, values)
                 connection.commit()
-        return redirect('/settings.html')
+        return redirect('/')
     else:
         with create_connection() as connection:
             with connection.cursor() as cursor:
@@ -141,7 +184,7 @@ def settings():
                 )
                 cursor.execute(sql, values)
                 result = cursor.fetchone()
-                return render_template('/settings.html', result=result)
+        return render_template('/settings.html', result=result)
 
 
 

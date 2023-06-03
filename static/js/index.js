@@ -87,3 +87,16 @@ settingstabs.forEach((tab, index) => {
         });
     }
 });
+
+
+// cancel personal info submit
+const settings_cancel_personal_info = document.getElementById("settings_cancel_personal_info");
+
+if (settings_cancel_personal_info) {
+    settings_cancel_personal_info.onclick = function() 
+    {cancelsubmit()};
+
+    function cancelsubmit() {
+        window.location = "/"
+    };
+};

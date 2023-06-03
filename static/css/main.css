@@ -15,6 +15,9 @@ html {
     --white: #FFFFFF;
     --border: #afaba2;
     --lightblack: #686868;
+    --sec_button: #a8a19a;
+    --sec_button_hover: #96928d;
+    --grey: #4e4d4d;
     
 }
 * {
@@ -77,6 +80,21 @@ footer p {
     background: var(--button_hover);
     box-shadow: 0 0 10px var(--shadow);
 }
+.sec_button {
+    border-radius: 40px;
+    background: var(--sec_button);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    transition: all 0.3s ease-in;
+    color: var(--black);
+}
+.sec_button:hover {
+    background: var(--sec_button_hover);
+    box-shadow: 0 0 7px var(--shadow);
+}
 .message {
     color: #ff0000;
     font-weight: 600;
@@ -107,6 +125,13 @@ footer p {
     padding: 0 5px;
     background-color: var(--card_box);
     text-align: center;
+}
+
+.profile_img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0 0 10px var(--shadow);
 }
 
 
@@ -685,7 +710,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .posts_heading {
     position: relative;
     float: left;
-    height: 300px;
+    height: 278px;
     width: 65%;
     display: flex;
     justify-content: center;
@@ -708,10 +733,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .profile_image_self img {
     position: relative;
-    border-radius: 50%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    box-shadow: 0 0 10px var(--shadow);
 }
 .post_form_value {
     width: 100%;
@@ -798,20 +819,59 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .posts_section {
     position: relative;
     float: left;
-    height: 280px;
     width: 65%;
     display: flex;
     justify-content: center;
 }
 .posts_block {
     background-color: var(--box);
+    overflow: scroll;
     height: 400px;
     width: 85%;
     border-radius: 20px;
+    padding: 10px;
     box-shadow: 0 0 20px var(--shadow);
 }
-.posts {
+.post {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    height: fit-content;
+    margin-bottom: 10px;
+    display: flex;
+}
+.post_img_col {
+    padding: 8px 12px;
+    width: 15%;
+}
+.post_main_col {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+.post_main_col_head {
+    display: flex;
+}
+.post_main_col_head p {
+    margin: 4px 16px 2px 8px;
+    font-size: 1.2em;
+}
+.post_main_col_head .post_username {
+    font-weight: 600;
+    color: var(--white);
+}
+.post_main_col_head .post_posttime {
+    color: var(--grey);
+}
+
+.post_main_col_body {
+    height: 100%;
     padding: 10px;
+}
+.post_main_col_body p {
+    color: var(--white);
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 
@@ -820,7 +880,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* CONTACT Page */
 .faq-section {
-    height: 900px;
+    margin-bottom: 90px;
     padding: 20px;
 }
 .faq-header {
@@ -1045,7 +1105,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         width: 80%;
     }
 }
-
 .settings_inputbox {
     position: relative;
     font-size: .9em;
@@ -1058,3 +1117,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: var(--section2);
     color: var(--black);
 }
+
+.settings_information_actions {
+    grid-column: 2;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+@media (max-width: 761px) {
+    .settings_information_actions {
+        grid-column: 1 / 2;
+    }
+}
+.settings_button {
+    position: relative;
+    height: 30px;
+    right: 0;
+    border-radius: 10px;
+    font-size: .8em;
+}
+@media (max-width: 761px) {
+    .settings_button {
+        width: 60%;
+        font-size: .6em;
+    }
+}
+
+

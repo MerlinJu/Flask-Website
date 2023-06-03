@@ -28,11 +28,11 @@
             <div class="post_self_block">
                 <div class="post_self">
                     <div class="profile_image_self">
-                        <img src="{{ session['profile_pic'] or 'images/style-images/avatar.png' }}" height="60" alt="profile">
+                        <img class="profile_img" src="{{ session['profile_pic'] }}" height="60" alt="profile">
                     </div>
                     <div class="post_form_value">
-                        <form>
-                            <textarea type="text" id="text" placeholder="Enter your text here..." maxlength="250" required></textarea>
+                        <form method="POST">
+                            <textarea type="text" name="content" id="text" placeholder="Enter your text here..." maxlength="250" required></textarea>
                             <div class="post_form_value_footer">
                                 <p class="characters_counter"><span id="counter">250</span></p>
                                 <button class="button post_create" type="submit" name="Value">Post</button>
@@ -60,13 +60,36 @@
         </div>
         <div class="posts_section">
             <div class="posts_block">
-                <div class="posts">
 
-                    <!-- {% for posts in _posts %}
+                {% for posts in allposts %}
 
-                    {% endfor %} -->
+                    <div class="post">
+                        <div class="post_img_col">
+                            <img class="profile_img" src="{{ posts['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
+                        </div>
+                        <div class="post_main_col">
+                            <div class="post_main_col_head">
+                                <p class="post_username">{{ posts['username'] }}</p>
+                                <p class="post_posttime" >
+                                    {% if posts.post_time %}
+                                        {{ posts.post_time | format_datetime }}
+                                    {% else %}
+                                        No post time available
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="post_main_col_body">
+                                <p>
+                                    {{ posts['content'] }}
+                                </p>
+                            </div>
+                            
 
-                </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
             </div>
         </div>
 
