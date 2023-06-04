@@ -67,10 +67,6 @@
                 </div>
             </div>
             
-            
-        
-            
-
         </div>
         
     </div>
@@ -86,7 +82,11 @@
                     <div class="form_head">
                         <div class="contact_inputbox inputbox_parent" style="float: left;">
                             <label for="">Email</label> 
-                            <input class="inputbox" type="text" name="email" placeholder="Enter email here..." required> 
+                            {% if session['logged_in'] %}
+                                <input class="inputbox" type="text" name="email" placeholder="Enter email here..." value="{{ result['email'] }}" required> 
+                            {% else %}
+                                <input class="inputbox" type="text" name="email" placeholder="Enter email here..." required> 
+                            {% endif %}
                         </div>
                         
                         <div class="contact_inputbox inputbox_parent" style="float: right;">

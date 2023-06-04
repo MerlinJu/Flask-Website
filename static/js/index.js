@@ -67,7 +67,7 @@ const infos = document.querySelectorAll('.tab_information');
 settingstabs.forEach((tab, index) => {
     if (index < settingstabs.length - 1 ) {
         infos[index].style.display = 'none';
-        infos[0].style.display = 'block';
+        infos[1].style.display = 'block';
         settingstabs[0].classList.add('active');
 
 

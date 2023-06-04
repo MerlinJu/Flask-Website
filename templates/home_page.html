@@ -9,7 +9,7 @@
             <h2>Daily Report</h2>
             <div class="report_blocks_container">
                 <div class="new_messages report_block">
-                    <h3>New Messages</h3>
+                    <h3>Messages</h3>
                     <ion-icon name="chatbubbles-outline"></ion-icon>
                 </div>
                 <div class="Connections report_block">
@@ -28,7 +28,7 @@
             <div class="post_self_block">
                 <div class="post_self">
                     <div class="profile_image_self">
-                        <img class="profile_img" src="{{ session['profile_pic'] }}" height="60" alt="profile">
+                        <img class="profile_img" src="{{ result['profile_pic'] }}" height="60" alt="profile">
                     </div>
                     <div class="post_form_value">
                         <form method="POST">
@@ -47,17 +47,16 @@
                 <h3>Who to follow?</h3>
                 <div class="suggested_accounts">
                     {% for accs in allusers %}
-                        {% if loop.index <= 16 %}
+                        {% if loop.index <= 25 %}
                             <div class="account_box">
-                                <a href="#" >{{ accs['username'] }}</p>
+                                <a href="#" >{{ accs['username'] }}</a>
                             </div>
-                        {% else %}
-                            <!-- do nothing... -->
                         {% endif %}
                     {% endfor %}
                 </div>
             </div>
         </div>
+
         <div class="posts_section">
             <div class="posts_block">
 
