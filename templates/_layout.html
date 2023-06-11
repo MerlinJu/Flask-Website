@@ -26,7 +26,7 @@
             </li>
             <li class="profile">
                 {% if session['logged_in'] %}
-                    <a href="/profile_self?id={{ session['id'] }}">Profile </a>
+                    <a href="/profile?id={{ session['id'] }}">Profile </a>
                     <img src="{{ result['profile_pic'] }}" alt="profile" height="34">
                 {% else %}
                     <a href="/login">Log In</a>

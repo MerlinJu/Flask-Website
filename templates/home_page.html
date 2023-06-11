@@ -35,7 +35,7 @@
                             <textarea type="text" name="content" id="text" placeholder="Enter your text here..." maxlength="250" required></textarea>
                             <div class="post_form_value_footer">
                                 <p class="characters_counter"><span id="counter">250</span></p>
-                                <button class="button post_create" type="submit" name="Value">Post</button>
+                                <button class="button prim_button post_create" type="submit" name="Value">Post</button>
                             </div>
                         </form>
                     </div>
@@ -61,7 +61,6 @@
             <div class="posts_block">
 
                 {% for posts in allposts %}
-
                     <div class="post">
                         <div class="post_img_col">
                             <img class="profile_img" src="{{ posts['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
@@ -82,11 +81,8 @@
                                     {{ posts['content'] }}
                                 </p>
                             </div>
-                            
-
                         </div>
                     </div>
-
                 {% endfor %}
 
             </div>

@@ -41,25 +41,25 @@
                 <h3>Contact Info</h3>
                 <h6>This Information is used for contacting purposes and will not be displayed publicy</h6>
                 <form class="personal_information_form" method="POST">
-                    <div class="settings_inputbox inputbox_parent">
+                    <div class="prim_inputbox_parent settings_inputbox_parent">
                         <label for="">First name</label> 
-                        <input class="inputbox" type="text" name="fname" value="{{ result['fname'] }}" required>
+                        <input class="prim_inputbox settings_inputbox" type="text" name="fname" value="{{ result['fname'] }}" required>
                     </div>
-                    <div class="settings_inputbox inputbox_parent">
+                    <div class="prim_inputbox_parent settings_inputbox_parent">
                         <label for="">Last name</label> 
-                        <input class="inputbox" type="text" name="lname" value="{{ result['lname'] }}" required>
+                        <input class="prim_inputbox settings_inputbox" type="text" name="lname" value="{{ result['lname'] }}" required>
                     </div>
-                    <div class="settings_inputbox inputbox_parent">
+                    <div class="prim_inputbox_parent settings_inputbox_parent">
                         <label for="">Email</label> 
-                        <input class="inputbox" type="email" name="email" value="{{ result['email'] }}" required>
+                        <input class="prim_inputbox settings_inputbox" type="email" name="email" value="{{ result['email'] }}" required>
                     </div>
-                    <div class="settings_inputbox inputbox_parent">
+                    <div class="prim_inputbox_parent settings_inputbox_parent">
                         <label for="">Phone number</label> 
-                        <input class="inputbox" type="text" name="phonenumber" value="{{ result['phonenumber'] }}" required>
+                        <input class="prim_inputbox settings_inputbox" type="text" name="phonenumber" value="{{ result['phonenumber'] }}" required>
                     </div>
                     <div class="settings_information_actions">
-                        <button type="button" id="settings_cancel_personal_info" class="sec_button settings_button settings_cancel">Cancel</button>
-                        <button type="submit" class="button settings_button settings_sumbit" name="Value">Save</button>
+                        <button type="button" id="settings_cancel_personal_info" class="button sec_button settings_button settings_cancel">Cancel</button>
+                        <button type="submit" class="button prim_button settings_button settings_sumbit" name="Value">Save</button>
                     </div>
 
                 </form>

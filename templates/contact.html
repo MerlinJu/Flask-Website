@@ -1,4 +1,4 @@
-{% extends "_layout.html"%} 
+{% extends "_layout.html" %} 
 
 {% block content %}
 
@@ -80,27 +80,27 @@
             <div class="ticket-form-value">
                 <form method="POST">
                     <div class="form_head">
-                        <div class="contact_inputbox inputbox_parent" style="float: left;">
+                        <div class="contact_inputbox contact_inputbox_parent prim_inputbox_parent" style="float: left;">
                             <label for="">Email</label> 
                             {% if session['logged_in'] %}
-                                <input class="inputbox" type="text" name="email" placeholder="Enter email here..." value="{{ result['email'] }}" required> 
+                                <input class="prim_inputbox" type="text" name="email" placeholder="Enter email here..." value="{{ result['email'] }}" required> 
                             {% else %}
-                                <input class="inputbox" type="text" name="email" placeholder="Enter email here..." required> 
+                                <input class="prim_inputbox" type="text" name="email" placeholder="Enter email here..." required> 
                             {% endif %}
                         </div>
                         
-                        <div class="contact_inputbox inputbox_parent" style="float: right;">
+                        <div class="contact_inputbox_parent prim_inputbox_parent" style="float: right;">
                             <label for="">Full name</label> 
-                            <input class="inputbox" type="text" name="full_name" placeholder="Enter name here..." required>
+                            <input class="prim_inputbox" type="text" name="full_name" placeholder="Enter name here..." required>
                         </div>
                     </div>
-                    <div class="contact_textarea inputbox_parent">
+                    <div class="contact_textarea contact_inputbox_parent prim_inputbox_parent">
                         <label for="">Description of the problem</label> 
                         <textarea id="text" type="text" placeholder="Enter text here..." maxlength="1000" required></textarea>
                     </div>
                     <div class="contact_box_footer">
                         <p class="characters_counter"><span id="counter">1000</span></p>
-                        <button class="button contact_button" type="submit" name="Value">Send</button>
+                        <button class="button prim_button contact_button" type="submit" name="Value">Send</button>
                     </div>
 
                 </form>

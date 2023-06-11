@@ -67,27 +67,25 @@ footer p {
 /* Button main styles */
 .button {
     border-radius: 40px;
-    background: var(--button);
     border: none;
     outline: none;
     cursor: pointer;
     font-size: 1em;
     font-weight: 700;
+}
+
+.prim_button {
+    background: var(--button);
     transition: all 0.3s ease-in;
     color: var(--white);
 }
-.button:hover {
+.prim_button:hover {
     background: var(--button_hover);
     box-shadow: 0 0 10px var(--shadow);
 }
+
 .sec_button {
-    border-radius: 40px;
     background: var(--sec_button);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 700;
     transition: all 0.3s ease-in;
     color: var(--black);
 }
@@ -95,6 +93,7 @@ footer p {
     background: var(--sec_button_hover);
     box-shadow: 0 0 7px var(--shadow);
 }
+
 .message {
     color: #ff0000;
     font-weight: 600;
@@ -105,7 +104,7 @@ footer p {
 
 
 /* Inputbox */
-.inputbox {
+.prim_inputbox {
     background-color: transparent;
     border: none;
     border-radius: 10px;
@@ -116,15 +115,60 @@ footer p {
     font-size: 1em;
     width: 100%;
 }
-.inputbox_parent label {
+.prim_inputbox_parent label {
     display: inline-block;
     color: var(--white);
     position: absolute;
+    font-size: .9em;
     top: -13px;
     left: 11px;
     padding: 0 5px;
-    background-color: var(--card_box);
+    background-color: inherit;
     text-align: center;
+}
+.prim_inputbox_parent {
+    position: relative;
+}
+
+.sec_inputbox {
+    position: relative;
+    background-color: transparent;
+    border-bottom: 2px solid #fff;
+}
+.sec_inputbox label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+.sec_inputbox input:focus ~ label,
+.sec_inputbox input:not(:placeholder-shown) ~ label{
+top: -7px;
+}
+.sec_inputbox input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+.sec_inputbox ion-icon {
+    position: absolute;
+    color: #fff;
+    font-size: 1.2em;
+    right: 8px;
+    top: 16px;
+}
+.sec_inputbox input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--card_box) inset;
 }
 
 .profile_img {
@@ -228,54 +272,16 @@ footer p {
     color: white;
 }
 .login_inputbox {
-    position: relative;
-    background-color: transparent;
-    margin: 30px 0;
-    width: 310px;
-    border-bottom: 2px solid #fff;
+    margin-top: 30px;
+    width: 18rem;
 }
-input:-webkit-autofill {
-    -webkit-text-fill-color: rgb(255, 255, 255) !important;
-    -webkit-box-shadow: 0 0 0px 1000px var(--card_box) inset;
-}
-.login_inputbox label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 1em;
-    pointer-events: none;
-    transition: .5s;
-}
-.login_inputbox input:focus ~ label,
-.login_inputbox input:not(:placeholder-shown) ~ label{
-top: -7px;
-}
-.login_inputbox input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    font-size: 1em;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 0 35px 0 5px;
-}
-.login_inputbox ion-icon {
-    position: absolute;
-    color: #fff;
-    font-size: 1.2em;
-    right: 8px;
-    top: 16px;
-}
-.wrong_info {
-    margin: -8px 0 0;
-}
+
+
+
 .forget {
     color: #fff;
     font-size: .9em;
-    margin: 25px 0 15px;
+    margin-top: 30px;
     display: flex;
     justify-content: space-around;
 }
@@ -301,14 +307,15 @@ top: -7px;
     text-decoration: underline;
 }
 .login_button {
+    margin-top: 15px;
     width: 100%;
-    height: 40px;
+    height: 2.5rem;
 }
 .register {
     font-size: .9em;
     color: #fff;
     text-align: center;
-    margin: 25px 0 10px;
+    margin-top: 14px;
 }
 .register p a {
     text-decoration: none;
@@ -320,13 +327,21 @@ top: -7px;
 }
 
 
+/* Forgot Password */
+.update_password_button {
+    width: 100%;
+    height: 2.5rem;
+    text-align: center;
+}
+
+
 
 
 /* Signup Page */
 .signup_form-box {
     background-color: var(--card_box);
     border-radius: 40px;
-    height: 550px;
+    height: 520px;
     width: 600px;
     display: flex;
     justify-content: center;
@@ -346,94 +361,27 @@ top: -7px;
 }
 .signup_header {
     position: relative;
-    font-size: 2em;
-    margin: 42px 36px 24px;
-    color: #fff;
+    font-size: 2.2em;
+    margin-top: 42px;
+    color: var(--white);
     text-align: center;
 }
 .signup_inputbox {
-    position: relative;
-    background-color: transparent;
+    margin-top: 35px;
     width: 190px;
-    margin: 20px 0;
-    border-bottom: 2px solid #fff;
-}
-.signup_inputbox label {
-    position: absolute;
-    color: #fff;
-    left: 5px;
-    pointer-events: none;
-    transform: translateY(-50%);
-    top: 50%;
-    font-size: 1em;
-    transition: 0.3s;
-}
-.signup_inputbox input:focus ~ label,
-.signup_inputbox input:not(:placeholder-shown) ~ label{
-top: -7px;
-}
-.signup_inputbox input {
-    color: #fff;
-    width: 100%;
-    height: 50px;
-    font-size: 1em;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0 35px 0 5px;
-}
-.name_inputbox {
-    width: 50%;
-}
-.signup_inputbox ion-icon {
-    position: absolute;
-    color: #fff;
-    font-size: 1.2em;
-    right: 8px;
-    top: 16px;
-}
-.signup_bday_input {
-    color: #fff;
-    width: 100%;
-    height: 50px;
-    font-size: 1em;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0 35px 0 5px;
-}
-.signup_bday label {
-    color: #fff;
-    position: absolute;
-    left: 5px;
-    pointer-events: none;
-    transform: translateY(-50%);
-    top: 50%;
-    font-size: 1em;
-    transition: 0.3s;
-}
-.signup_bday input:focus ~ label,
-.signup_bday input:not(:placeholder-shown) ~ label{
-top: -7px;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
-}
-.signup_bday ion-icon {
-    color: #fff;
-    position: absolute;
-    font-size: 1.2em;
-    right: 8px;
-    top: 16px;
 }
 .signup_footer {
     position: relative;
     width: 100%;
     text-align: center;
+    margin-top: 20px;
 }
 .signup_button {
-    width: 280px;
-    height: 40px;
+    width: 19rem;
+    height: 2.7rem;
 }
 .already {
     font-size: .9em;
@@ -667,11 +615,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* Report */
-.daily_report {
-    height: 100%;
-    width: 100%;
-    overflow: none;
-}
 .daily_report h2 {
     color: var(--white);
     text-align: center;
@@ -679,6 +622,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 22px 12px 28px;
 }
 .report_blocks_container {
+    position: relative;
     color: var(--white);
     display: flex;
     justify-content: space-evenly;
@@ -779,8 +723,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin: 20px;
 }
 .post_create {
-    width: 100px;
-    height: 40px;
+    width: 7rem;
+    height: 2.5rem;
 }
 .posts_side {
     position: relative;
@@ -859,12 +803,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .post_img_col {
     padding: 8px 12px;
-    width: 15%;
+    width: fit-content;
 }
 .post_main_col {
     display: flex;
     flex-direction: column;
     width: 85%;
+    word-wrap: break-word;
 }
 .post_main_col_head {
     display: flex;
@@ -887,10 +832,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .post_main_col_body p {
     color: var(--white);
-    overflow: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
+
 
 
 
@@ -999,6 +942,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .contact_inputbox {
     position: relative;
     width: 45%;
+}
+.contact_inputbox_parent label {
+    background-color: var(--box);
 }
 .contact_textarea {
     position: relative;
@@ -1123,17 +1069,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         width: 80%;
     }
 }
-.settings_inputbox {
-    position: relative;
-    font-size: .9em;
-}
-.settings_inputbox .inputbox {
-    color: var(--black);
-    font-size: .9em;
-}
-.settings_inputbox label {
+.settings_inputbox_parent label {
     background-color: var(--section2);
-    color: var(--black);
+}
+.settings_inputbox {
+    font-size: .8em;
 }
 
 .settings_information_actions {

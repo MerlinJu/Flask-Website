@@ -15,40 +15,25 @@
 
             <div class="user-info">
                 <ion-icon name="text-outline"></ion-icon>
-                <label for="">First name</label>
-                <p>{{ result['fname'] }}</p>
+                <label for="">Pro Game</label>
+                <p>{{ result['pro_game'] }}</p>
             </div>
             <div class="user-info">
                 <ion-icon name="text-outline"></ion-icon>
-                <label for="">Last name</label>
-                <p>{{ result['lname'] }}</p>
+                <label for="">Esports Team</label>
+                <p>{{ result['esport_team'] }}</p>
             </div>
             <div class="user-info">
                 <ion-icon name="mail-outline"></ion-icon>
-                <label for="">Email</label>
-                <p>{{ result['email'] }}</p>
-            </div>
-            <div class="user-info">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <label for="">Password</label>
-                <p>{{ result['password'] }}</p>
-            </div>
-            <div class="user-info">
-                <ion-icon name="calendar-outline"></ion-icon>
-                <label for="">Birthday</label>
-                <p>{{ result['birthday'] }}</p>
-            </div>
-            <div class="user-info">
-                <ion-icon name="calendar-outline"></ion-icon>
-                <label for="">User since</label>
-                <p>{{ result['acc_creation'] }}</p>
+                <label for="">Esports Org</label>
+                <p>{{ result['esport_org'] }}</p>
             </div>
 
 
         </div>
 
         <div class="user-footer">
-            <button class="button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
+            <button class="button prim_button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
             <div class="log_out-text">
                 <p>Want to logout? <a href="/logout">Log Out</a></p>
             </div>
