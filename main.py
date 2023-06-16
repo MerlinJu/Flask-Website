@@ -94,7 +94,7 @@ def secure_password(password):
 
 
 # USER AUTHENTICATION & DATA
-def current_user():
+def get_current_user():
     if 'logged_in' in session and 'id' in session:
         current_user_id = session['id']
         with create_connection() as connection:
@@ -105,8 +105,17 @@ def current_user():
     else:
         return None
     
+def get_userpw_by_email(email):
+    if 'logged_in' in session:
+        return
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT password FROM users WHERE email = %s", (email,))
+            password = cursor.fetchone()
+            return password
+    
 def is_admin():
-    user = current_user()   # getting the current user data
+    user = get_current_user()   # getting the current user data
     if user and 'role' in session and user['role'] == 'Admin' and 'Admin' in session['role']:
         return True
     else:
@@ -162,7 +171,7 @@ def main_page():
                     return redirect('/')
                     
         else:
-            result = current_user()
+            result = get_current_user()
             allposts = getall_posts()
             allusers = getall_users()
             return render_template('home_page.html', result=result ,allposts=allposts, allusers=allusers)
@@ -214,6 +223,7 @@ def signup():
 
 @app.route('/login', methods = ["POST", "GET"])
 def login():
+    session['activity'] = ''
     if request.method == "POST":
         with create_connection() as connection:
             with connection.cursor() as cursor:
@@ -227,7 +237,6 @@ def login():
 
                 if result:
                     stored_password = result['password']
-
                     if verify_password(request.form['password'], stored_password):
                         session['logged_in'] = True
                         session['id'] = result['id']
@@ -248,72 +257,146 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route('/forgot_password')
+# FORGET PASSWORD AUTHENTICATION
+@app.route('/req_forget_password', methods = ["POST", "GET"])
+def req_forget_password():
+    if 'logged_in' in session:
+        return redirect('/')
+    return render_template('req_forget_password.html')
+
+@app.route('/forget_password_send_email', methods = ["POST", "GET"])
+def send_email():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = """ SELECT * FROM users WHERE 
+            email = %s """
+            values = (
+                request.form["email"]
+            )
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
+            if result:
+                # send confirmation email
+                return redirect('/ver_forget_password')
+            else:
+                flash('email not found!')
+                return redirect('/req_forget_password')
+
+@app.route('/ver_forget_password', methods = ["POST", "GET"])
+def ver_forget_password():
+    if 'logged_in' in session:
+        return redirect('/')
+    else:
+        if request.method == "POST" and request.form['ver_code'] == '12345':
+            print('test')
+            session['activity'] = 'resetting password'
+            print(session)
+            return redirect('/forget_password')
+
+        else:
+            return render_template('ver_forget_password.html')
+
+@app.route('/forget_password', methods = ["POST", "GET"])
 def forgot_password():
     if 'logged_in' in session:
         return redirect('/')
-    if request.method == 'POST':
+    if request.method == 'POST' and 'resetting password' in session['activity']:
         with create_connection() as connection:
             with connection.cursor() as cursor:
-                cursor.execute('UPDATE users SET password = %s WHERE email = %s', (request.form['password'], request.form['email']) )
-                connection.commit()
-                return redirect('/login')
+                if request.form['new_password'] == request.form['new_conf_password']:
+                    sql = """UPDATE users SET password = %s 
+                    WHERE email = %s"""
+                    values = (request.form['new_password'], request.args['email'])
+                    cursor.execute(sql, values)
+                    connection.commit()
+                    return redirect('/')
+                
+                flash('wrong Info!')
+                return redirect('/')
+    elif 'resetting password' in session['activity']:
+        return render_template('forget_password.html')
     else:
-        return render_template('forgot_password.html')
+        return redirect('/')
 
 
 @app.route('/contact')
 def contact():
     if 'logged_in' in session:
-        result = current_user()
+        result = get_current_user()
         return render_template('/contact.html', result=result)
     else:
         return render_template('/contact.html')
 
-
 @app.route('/settings', methods = ["POST", "GET"])
 def settings():
     if 'logged_in' in session:
-        if request.method == 'POST':
-            with create_connection() as connection:
-                with connection.cursor() as cursor:
-
-                    if is_phone_number(request.form['phonenumber']):
-                        sql = """UPDATE users SET
-                        fname = %s,
-                        lname = %s,
-                        email = %s,
-                        phonenumber = %s
-                        WHERE id = %s
-                        """
-                        values = (
-                            request.form['fname'],
-                            request.form['lname'],
-                            request.form['email'],
-                            request.form['phonenumber'],
-                            session['id']
-                        )
-                        cursor.execute(sql, values)
-                        connection.commit()
-                        return redirect('/')
-                    else:
-                        return redirect('/settings')
-        else:
-            result = current_user()
-            return render_template('/settings.html', result=result)
-        
+        result = get_current_user()
+        return render_template('/settings.html', result=result)
     else:
         return redirect('/')
+    
+# SETTINGS FORM ACTIONS
+@app.route('/update_personal_information', methods = ["GET", "POST"])
+def update_personal_information():
+    if request.form['fname'] and request.form['lname'] and request.form['email'] and request.form['phonenumber']:
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                if is_phone_number(request.form['phonenumber']):
+                    sql = """UPDATE users SET
+                    fname = %s,
+                    lname = %s,
+                    email = %s,
+                    phonenumber = %s
+                    WHERE id = %s
+                    """
+                    values = (
+                        request.form['fname'],
+                        request.form['lname'],
+                        request.form['email'],
+                        request.form['phonenumber'],
+                        session['id']
+                    )
+                    cursor.execute(sql, values)
+                    connection.commit()
+                    return redirect('/')
+                else:
+                    return redirect('/settings')
+    else:
+        return redirect('/settings')
+
+@app.route('/update_password', methods = ["GET", "POST"])
+def update_security():
+    if request.form['new_password'] and secure_password(request.form['new_password']):
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql = """UPDATE users SET
+                password = %s
+                WHERE id = %s
+                """
+                values = (
+                    hash_password(request.form['new_password']),
+                    session['id']
+                )
+                cursor.execute(sql, values)
+                connection.commit()
+                return redirect('/')
+    else:
+        return redirect('/settings')
+
+@app.route('/update_appearance')
+def update_appearance():
+    pass
+
+@app.route('/update_language')
+def update_language():
+    pass
+
 
 
 @app.route('/profile')
 def account_details():
     if 'logged_in' in session:
-        result = get_public_details()
-        
-        return render_template('/profile.html', result=result)
-    
-
+        return render_template('/profile.html', result=get_public_details())
     else:
         return redirect('/')
 
@@ -347,7 +430,7 @@ def edit_profile():
             return redirect('/')
 
         else:
-            result = current_user()
+            result = get_current_user()
             return render_template('/edit_profile.html', result=result)
     else:
         return redirect('/')
@@ -357,7 +440,7 @@ def edit_profile():
 def admin_panel():
     if is_admin():
         allusers = getall_users()
-        result = current_user()
+        result = get_current_user()
         return render_template('/admin_panel.html', result=result, allusers=allusers)
     else:
         return redirect('/')

@@ -89,9 +89,14 @@
                             {% endif %}
                         </div>
                         
-                        <div class="contact_inputbox_parent prim_inputbox_parent" style="float: right;">
+                        <div class="contact_inputbox contact_inputbox_parent prim_inputbox_parent" style="float: right;">
                             <label for="">Full name</label> 
-                            <input class="prim_inputbox" type="text" name="full_name" placeholder="Enter name here..." required>
+                            {% if session['logged_in'] %}
+                                <input class="prim_inputbox" type="text" name="full_name" placeholder="Enter name here..." value ="{{ result['fname'] + ' ' + result['lname'] }}"
+                                required>
+                            {% else %}
+                                <input class="prim_inputbox" type="text" name="full_name" placeholder="Enter name here..." required>                              
+                            {% endif %}
                         </div>
                     </div>
                     <div class="contact_textarea contact_inputbox_parent prim_inputbox_parent">

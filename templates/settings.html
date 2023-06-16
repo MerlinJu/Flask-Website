@@ -40,7 +40,7 @@
                 <hr class="sector_hr">
                 <h3>Contact Info</h3>
                 <h6>This Information is used for contacting purposes and will not be displayed publicy</h6>
-                <form class="personal_information_form" method="POST">
+                <form action="/update_personal_information" class="personal_information_form" method="POST">
                     <div class="prim_inputbox_parent settings_inputbox_parent">
                         <label for="">First name</label> 
                         <input class="prim_inputbox settings_inputbox" type="text" name="fname" value="{{ result['fname'] }}" required>
@@ -72,10 +72,8 @@
                 <hr class="sector_hr">
                 <h3>Password</h3>
                 <h6></h6>
-
-
-
-                
+                <button onclick="change_password()" class="button prim_button settings_button change_pw_button">Change Password</button>
+                <!-- POPUP AT BOTTOM OF HTML -->  
             </div>
 
             <div class="Appearance_information tab_information">
@@ -91,9 +89,23 @@
 
     </div>
 
-    
 
 </section>
+
+<div id="popup_change_pw" class="grey_bg">
+    <div class="change_password_popup">
+        <form action="/update_password" method="POST" class="form_value_change_pw">
+            <div class="prim_inputbox_parent settings_inputbox_parent">
+                <label for="">Change Password</label> 
+                <input class="prim_inputbox settings_inputbox" type="text" name="new_password" placeholder="New Password" required>
+            </div>
+            <div class="popup_pw_buttons">
+                <button onclick="close_change_password()" class="button sec_button settings_button">Cancel</button>
+                <button class="button prim_button settings_button" type="submit" name="value">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 
 

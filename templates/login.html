@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="main-section main-section_card" >
-    <div class="login_form-box">
+    <div class="form-box login-forget_form-box">
         <div class="login_form-value">
             <form action="", method="POST">
                 <h2 class="login_header" >Login</h2>
@@ -23,7 +23,7 @@
                     {% endfor %}
                 </div>
                 <div class="forget">
-                    <label for=""><input class="forget_checkbox" type="checkbox">Remember Me <a href="/forgot_password">Forgot Password</a></label>
+                    <label for=""><input class="forget_checkbox" type="checkbox">Remember Me <a href="/req_forget_password">Forgot Password</a></label>
                 </div>
                 <button class="button prim_button login_button" type="submit" name="Value">Log in</button>
                 <div class="register">
@@ -38,9 +38,5 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 
-
-{% for message in get_flashed_messages() %}
-    <p class="message">{{ message }}</p>
-{% endfor %}
 
 {% endblock %}

@@ -100,3 +100,13 @@ if (settings_cancel_personal_info) {
         window.location = "/"
     };
 };
+
+// settings change password popup form
+document.getElementById('popup_change_pw').style.display = 'none';
+
+function change_password() {
+    document.getElementById('popup_change_pw').style.display = 'flex';
+}
+function close_change_password() {
+    document.getElementById('popup_change_pw').style.display = 'none';
+}
