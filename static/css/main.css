@@ -18,7 +18,8 @@ html {
     --sec_button: #a8a19a;
     --sec_button_hover: #96928d;
     --grey: #4e4d4d;
-    
+    --green-inside: #83eb6a;
+    --green-outside: #54ca37;
 }
 * {
     margin: 0;
@@ -99,6 +100,7 @@ footer p {
     font-weight: 600;
     font-size: 1.1em;
     text-align: center;
+    margin-top: 10px;
 }
 
 
@@ -254,17 +256,19 @@ top: -7px;
 
 
 /* Login Page */
-.login_form-box {
+.form-box {
     position: relative;
     background-color: var(--card_box);
     border-radius: 20px;
-    max-width: 31em;
-    width: 31em;
-    height: 470px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 20px var(--shadow);
+}
+.login-forget_form-box {
+    max-width: 31em;
+    width: 31em;
+    height: 470px;
 }
 .login_header {
     font-size: 2em;
@@ -328,28 +332,77 @@ top: -7px;
 
 
 /* Forgot Password */
+.forget_form-box {
+    height: fit-content;
+    width: fit-content;
+    padding: 50px 40px;
+}
+.forget_header {
+    font-size: 2em;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2.8rem;
+}
+.forgot_inputbox {
+    margin-top: 30px;
+    width: 18rem;
+}
+
 .update_password_button {
     width: 100%;
     height: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+.login {
+    margin-top: 12px;
+    color: var(--white);
+    text-align: center;
+    font-size: 1em;
+}
+.login a {
+    color: var(--white);
+    font-weight: bold;
+    text-decoration: none;
+}
+.login a:hover {
+    text-decoration: underline;
+}
+.forgot_password_hr {
+    margin-top: 16px;
+}
+.explaination {
+    margin-top: 18px;
+    text-align: center;
+    width: 18rem;
+    color: var(--white);
+}
+.final_page {
+    width: 7rem;
+    height: 2rem;
+}
+
+.ver_forget_pw_button {
+    margin-top: 20px;
+    width: 100%;
+    height: 2.5rem;
+}
+.forgot_value form p {
+    color: var(--white);
+    margin-top: 10px;
     text-align: center;
 }
 
 
 
 
+
+
 /* Signup Page */
 .signup_form-box {
-    background-color: var(--card_box);
-    border-radius: 40px;
-    height: 520px;
-    width: 600px;
-    display: flex;
-    justify-content: center;
-    margin-top: -30px;
-    box-shadow: 0 0 20px var(--shadow);
-}
-.signup_form-box::-webkit-scrollbar {
-    display: none;
+    max-width: 36em;
+    width: 36em;
+    height: 530px;
 }
 .form_signup {
     padding: 10px 20px;
@@ -1103,4 +1156,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+.change_password_popup {
+    background-color: var(--box);
+    border-radius: 10px;
+    box-shadow:2px 3px 5px #999;
+    position: fixed;
+    z-index: 9;
+    width: 44rem;
+    height: 11rem;
+    border: 2px solid var(--border);
+}
+.form_value_change_pw {
+    position: relative;
+    padding: 50px 20px;
+    font-size: 1.3em;
+}
+.form_value_change_pw label {
+    background-color: var(--box);
+}
+.form_value_change_pw input {
+    width: 100%;
+}
+.form_value_change_pw button {
+    margin-top: 10px;
+    width: 100%;
+}
+.popup_pw_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.change_pw_button {
+    width: 20rem;
+    height: 2.5rem;
+}
 
+.grey_bg {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
