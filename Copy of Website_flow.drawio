@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-25T21:06:25.897Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" version="21.3.2" etag="T-Q3oYK4a94B_1qmxzMc" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-25T21:23:30.611Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" version="21.3.2" etag="e9anejSnD68IVRznqrQP" type="github">
   <diagram name="Page-1" id="ChJXubemp8RFGHCHmPLh">
     <mxGraphModel dx="1471" dy="1751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -318,6 +318,18 @@
         </mxCell>
         <mxCell id="lQMvvRKDLv_ckQjSCARD-40" value="Team Builder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="220" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lQMvvRKDLv_ckQjSCARD-45" value="write people on the app" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="610" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lQMvvRKDLv_ckQjSCARD-46" value="similar to a friends tab" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="610" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lQMvvRKDLv_ckQjSCARD-47" value="see and manage your network of people" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="660" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lQMvvRKDLv_ckQjSCARD-48" value="have a good overview over your team with varous features" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="610" width="170" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
