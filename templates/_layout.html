@@ -15,11 +15,18 @@
             <p>MJs</p>
         </div>
         <ul class="menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li>
+                <a href="/">Home</a>
+                <ion-icon name="grid-outline"></ion-icon>
+            </li>
+            <li>
+                <a href="/contact">Contact</a>
+                <ion-icon name="help-circle-outline"></ion-icon>
+            </li>
             <li>
                 {% if session['logged_in'] %}
                     <a href="/settings">Settings</a> 
+                    <ion-icon name="settings-outline"></ion-icon>
                 {% else %}
                     <!-- nothing -->
                 {% endif %}
@@ -42,6 +49,9 @@
     </main>
 
 <script src="static/js/index.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 
 </body>

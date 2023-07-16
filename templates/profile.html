@@ -6,37 +6,67 @@
     <div class="user-box">
         <div class="user-heading">
             <div class="user-info_pic">
-                <img src="{{ result['profile_pic'] or 'static/style-images/avatar.png' }}" alt="profile" height="78">
+                <img src="{{ viewuser['profile_pic'] }}" alt="profile" height="78">
             </div>
-            <h2 class="user-headline">@{{ result['username'] }}</h2>
+            <div class="user-edit-heading-username">
+                <p class="user-headline-input at_sign">@</p><input type="text" name="username" class="user-headline-input user-headline-username" value="{{ viewuser['username'] }}">
+            </div>
+            {% if result['username'] == viewuser['username'] %}
+                <button class="button prim_button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
+            {% endif %}
         </div>
-
         <div class="user-values">
-
             <div class="user-info">
                 <ion-icon name="text-outline"></ion-icon>
                 <label for="">Pro Game</label>
-                <p>{{ result['pro_game'] }}</p>
+                <p>{{ viewuser['pro_game'] }}</p>
             </div>
             <div class="user-info">
                 <ion-icon name="text-outline"></ion-icon>
                 <label for="">Esports Team</label>
-                <p>{{ result['esport_team'] }}</p>
+                <p>{{ viewuser['esport_team'] }}</p>
             </div>
             <div class="user-info">
                 <ion-icon name="mail-outline"></ion-icon>
-                <label for="">Esports Org</label>
-                <p>{{ result['esport_org'] }}</p>
+                <label for="">Esports Organisation</label>
+                <p>{{ viewuser['esport_org'] }}</p>
             </div>
-
-
         </div>
-
-        <div class="user-footer">
-            <button class="button prim_button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
-            <div class="log_out-text">
-                <p>Want to logout? <a href="/logout">Log Out</a></p>
-            </div>
+        <hr class="profile_hr">
+        <div class="user-posts">
+            {% for posts in userposts %}
+                <div class="post">
+                    <div class="post_img_col">
+                        <img class="profile_img" src="{{ posts['profile_pic'] }}" height="48" alt="profile">
+                    </div>
+                    <div class="post_main_col">
+                        <div class="post_main_col_head">
+                            {% if result['username'] == posts['username'] %}
+                                <p class="post_username">me</p>
+                            {% else %}
+                                <p class="post_username">{{ posts['username'] }}</p>
+                            {% endif %}
+                            <p class="post_posttime" >
+                                {% if posts.post_time %}
+                                    {{ posts.post_time | format_datetime }}
+                                {% else %}
+                                    No post time available
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="post_main_col_body">
+                            <p>
+                                {{ posts['content'] }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if not userposts %}
+                <h3 class="noposts">
+                    This user has not created any posts yet!
+                </h3>
+            {% endif %}
         </div>
     </div>
 </section>

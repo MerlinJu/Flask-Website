@@ -1,0 +1,36 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<section class="main-section">
+    <p>{{ post }}</p>
+    <div class="post_box">
+        <div class="post">
+            <div class="post_img_col">
+                <img class="profile_img" src="{{ post['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
+            </div>
+            <div class="post_main_col">
+                <div class="post_main_col_head">
+                    <p class="post_username">{{ post['username'] }}</p>
+                    <p class="post_posttime" >
+                        {% if post.post_time %}
+                            {{ post.post_time | format_datetime }}
+                        {% else %}
+                            No post time available
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="post_main_col_body">
+                    <p>
+                        {{ post['content'] }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+{% endblock %}

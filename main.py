@@ -135,7 +135,22 @@ def getall_posts():
             allposts = cursor.fetchall()
             allposts = reversed(allposts)
             return allposts
-    
+        
+def get_user_posts(id):
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE id = %s", (id,))
+            userposts = cursor.fetchall()
+            return userposts
+
+def get_post_byid(id):
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE post_id = %s", (id,))
+            post = cursor.fetchall()
+            return post
+
+
 def get_public_details():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -186,7 +201,7 @@ def signup():
     if request.method == 'POST':
         if email_already_exists(request.form['email']):
             flash('Email already in use!')
-            return redirect('/signup') 
+            return redirect('/signup')
         if secure_password(request.form['password']):
             if is_valid_age(request.form['birthday']):
                 with create_connection() as connection:
@@ -385,44 +400,73 @@ def update_security():
 
 @app.route('/update_appearance')
 def update_appearance():
-    pass
+    return redirect('/')
 
 @app.route('/update_language')
 def update_language():
-    pass
+    return redirect('/')
+
+@app.route('/update_post')
+def update_post():
+    if 'logged_in' in session:
+        result = get_current_user()
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql = """UPDATE posts SET
+                """
+                pass
+
+@app.route('/post_view')
+def post_view():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM posts WHERE post_id = %s", (request.args['post_id']))
+            result = cursor.fetchone()
+        if 'logged_in' in session and result:
+            post = get_post_byid(request.args['post_id'])
+            print(post)
+            return render_template('post_view.html', result=get_current_user(), post=post)
+        else:
+            return redirect('/')
+
 
 
 
 @app.route('/profile')
 def account_details():
-    if 'logged_in' in session:
-        return render_template('/profile.html', result=get_public_details())
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT id FROM users WHERE id = %s", (request.args['id']))
+            result = cursor.fetchone()
+    if 'logged_in' in session and result:
+        userposts = get_user_posts(request.args['id'])
+        if userposts:
+            userposts = reversed(userposts)
+            return render_template('/profile.html', result=get_current_user(), viewuser=get_public_details(), userposts=userposts)
+        else:
+            return render_template('/profile.html', result=get_current_user(), viewuser=get_public_details(), userposts=userposts)
     else:
         return redirect('/')
 
 
 @app.route('/edit_profile', methods = ["POST", "GET"])
 def edit_profile():
-    if 'logged_in' in session:
+    if 'logged_in' in session and int(request.args['id']) == int(session['id']):
         if request.method == "POST":
             with create_connection() as connection:
                 with connection.cursor() as cursor:
                     sql = """UPDATE users SET
-                    fname = %s,
-                    lname = %s,
-                    password = %s,
-                    email = %s,
                     username = %s,
-                    birthday = %s
+                    pro_game = %s,
+                    esport_team = %s,
+                    esport_org = %s,
                     WHERE id = %s
                     """
                     values = (
-                        request.form['fname'],
-                        request.form['lname'],
-                        request.form['password'],
-                        request.form['email'],
                         request.form['username'],
-                        request.form['birthday'],
+                        request.form['pro_game'],
+                        request.form['esport_team'],
+                        request.form['esport_org'],
                         session['id']
                     )
                     cursor.execute(sql, values)
@@ -431,7 +475,8 @@ def edit_profile():
 
         else:
             result = get_current_user()
-            return render_template('/edit_profile.html', result=result)
+            public_details = get_public_details()
+            return render_template('/edit_profile.html', result=result, public_details=public_details)
     else:
         return redirect('/')
     

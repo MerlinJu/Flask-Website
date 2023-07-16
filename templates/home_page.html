@@ -49,7 +49,7 @@
                     {% for accs in allusers %}
                         {% if loop.index <= 25 %}
                             <div class="account_box">
-                                <a href="#" >{{ accs['username'] }}</a>
+                                <a href="/profile?id={{ accs['id'] }}" >{{ accs['username'] }}</a>
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -61,6 +61,7 @@
             <div class="posts_block">
 
                 {% for posts in allposts %}
+                <a href="/post_view?post_id={{ posts['post_id'] }}">
                     <div class="post">
                         <div class="post_img_col">
                             <img class="profile_img" src="{{ posts['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
@@ -83,6 +84,8 @@
                             </div>
                         </div>
                     </div>
+                </a>
+                    
                 {% endfor %}
 
             </div>

@@ -3,41 +3,33 @@
 {% block content %}
 
 <section class="main-section main-section_card">
-    <form class="user-box" method="POST">
+    <form class="user-box user-edit-box" method="POST">
         <div class="user-heading user-edit-heading">
             <div class="user-info_pic">
                 <img src="{{ result['profile_pic'] or 'images/style-images/avatar.png' }}" alt="profile" height="78">
             </div>
             <div class="user-edit-heading-username">
-                <p class="user-headline-input at_sign">@</p><input type="text" name="username" class="user-headline-input user-headline-username" value="{{ result['username'] }}">
+                <p class="user-headline-input at_sign">@</p><input type="text" name="username" class="user-headline-input user-headline-username" value="{{ public_details['username'] }}">
             </div>
+            {% if result['username'] == public_details['username'] %}
+                <button type="submit" class="button prim_button edit_profile" class="edit_profile-button" name="Value">Finish</button>
+            {% endif %}
         </div>
         <div class="user-values">
             <div class="user-info">
-                <label for="">First name</label>
-                <input type="text" name="fname" value="{{ result['fname'] }}" required>
+                <label for="">Pro Game</label>
+                <input type="text" name="fname" value="{{ public_details['pro_game'] }}" required>
             </div>
             <div class="user-info">
-                <label for="">Last name</label>
-                <input type="text" name="lname" value="{{ result['lname'] }}" required>
+                <label for="">Esports Team</label>
+                <input type="text" name="lname" value="{{ public_details['esport_team'] }}" required>
             </div>
             <div class="user-info">
-                <label for="">Email</label>
-                <input type="email" name="email" value="{{ result['email'] }}" required>
-            </div>
-            <div class="user-info">
-                <label for="">Password</label>
-                <input type="password" name="password" value="{{ result['password'] }}" required>
-            </div>
-            <div class="user-info">
-                <label for="">Birthday</label>
-                <input type="date" name="birthday" value="{{ result['birthday'] }}" required>
+                <label for="">Esports Organisation</label>
+                <input type="text" name="email" value="{{ public_details['esport_org'] }}" required>
             </div>
         </div>
 
-        <div class="user-footer">
-            <button type="submit" class="button prim_button update_profile" class="edit_profile-button" name="Value">Finish</button>
-        </div>
 
 
     </form>
