@@ -18,16 +18,21 @@
         <div class="user-values">
             <div class="user-info">
                 <label for="">Pro Game</label>
-                <input type="text" name="fname" value="{{ public_details['pro_game'] }}" required>
+                <input type="text" name="pro_game" value="{{ public_details['pro_game'] }}" required>
+            </div>
+            <div class="user-info">
+                <label for="">Ingame Rank</label>
+                <input type="text" name="ingame_rank" value="{{ public_details['ingame_rank'] }}" required>
             </div>
             <div class="user-info">
                 <label for="">Esports Team</label>
-                <input type="text" name="lname" value="{{ public_details['esport_team'] }}" required>
+                <input type="text" name="esport_team" value="{{ public_details['esport_team'] }}" required>
             </div>
             <div class="user-info">
                 <label for="">Esports Organisation</label>
-                <input type="text" name="email" value="{{ public_details['esport_org'] }}" required>
+                <input type="text" name="esport_org" value="{{ public_details['esport_org'] }}" required>
             </div>
+            
         </div>
 
 

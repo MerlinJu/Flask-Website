@@ -38,18 +38,26 @@ if (textarea && counter) {
 // FAQ Dropdowns contact
 const faqQuestions = document.querySelectorAll('.faq-question');
 const dropups = document.getElementsByClassName('drop-up');
+const question_boxes = document.querySelectorAll('.faq-element');
+
 
 for (var i = 0; i < dropups.length; i += 1) {
     dropups[i].style.display = 'none';
 }
 
-faqQuestions.forEach((question) => {
-    var dropdown = question.parentElement;
-    dropdown = dropdown.querySelector('.drop-down');
-    var dropup = question.parentElement;
-    dropup = dropup.querySelector('.drop-up');
-    var answer = question.parentElement;
-    var answer = answer.nextElementSibling;
+question_boxes.forEach((question) => {
+    console.log(question);
+
+    // var dropdown = question.nextSibling;
+    var dropdown = question.querySelector('.drop-down');
+    console.log(dropdown);
+
+    // var dropup = question.parentElement;
+    var dropup = question.querySelector('.drop-up');
+    console.log(dropup);
+
+    var answer = question.querySelector('.faq-answer');
+    // console.log(answer);
     
     question.addEventListener('click', () => {
         question.classList.toggle('active');

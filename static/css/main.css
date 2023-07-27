@@ -242,8 +242,6 @@ top: -7px;
 }
 .profile img {
     border-radius: 50%;
-    /* margin-right: 22px;
-    margin-left: -16px; */
     aspect-ratio: 1 / 1;
     object-fit: cover;
     box-shadow: 0 0 5px var(--shadow);
@@ -257,7 +255,7 @@ top: -7px;
 
 @media (max-width: 624px) {
     .menu {
-        justify-content: center;
+        justify-content: right;
     }
     .menu li a {
         opacity: 0;
@@ -523,6 +521,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (max-width: 731px) {
     .user-heading {
         margin: 10px 0 30px;
+        flex-direction: column;
+    }
+    .user-edit-heading-username {
+        margin: 20px 0;
+        justify-content: center;
+        align-items: center;
+    }
+    .user-edit-heading-username input {
+        width: 25%;
     }
 }
 .user-headline {
@@ -638,6 +645,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .user-edit-heading-username {
     display: flex;
+    padding-right: 20px;
 }
 .user-headline-input {
     position: relative;
@@ -667,7 +675,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* home page */
 .home_head_section {
     position: relative;
-    height: 350px;
+    margin-bottom: 50px;
     width: 100%;
     padding: 20px;
 }
@@ -684,6 +692,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 3em;
     font-weight: 500;
 }
+
 
 /* Report */
 .daily_report h2 {
@@ -704,7 +713,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center;
     background-color: var(--box);
     border-radius: 20px;
-    margin: 0 30px;
     box-shadow: 0 0 20px var(--shadow);
 }
 .report_block h3 {
@@ -714,6 +722,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 2.3em;
     color: var(--white);
     padding: 30px;
+}
+
+@media (max-width: 648px) {
+    .report_block h3 {
+        margin: 12px 4px 2px;
+        font-size: .9em;
+    }
+    .home_head_section {
+        padding: 8px;
+    }
+    .report_blocks_container {
+        padding: 8px 0;
+    }
+    .report_block ion-icon {
+        font-size: 2em;
+        color: var(--white);
+        padding: 26px;
+    }
+}
+
+@media (max-width: 464px) {
+    .report_block {
+        width: 28%;
+    }
+    .report_block ion-icon {
+        font-size: 1.6em;
+        color: var(--white);
+        padding: 14px;
+    }
+    .report_block h3 {
+        font-size: .6em;
+    }
 }
 
 
@@ -729,7 +769,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .posts_heading {
     position: relative;
-    height: 278px;
     display: flex;
     justify-content: center;
     grid-column: 1 / 4;
@@ -753,6 +792,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .profile_image_self img {
     position: relative;
+    height: 60px;
 }
 .post_form_value {
     width: 100%;
@@ -806,6 +846,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .posts_side {
         grid-column: 1 / max;
         justify-content: center;
+    }
+}
+@media (max-width: 364px) {
+    .posts_section {
+        margin-top: -100px;
+    }
+    .post_self_block {
+        height: 160px;
+    }
+    .post_self_block .post_form_value {
+        width: fit-content;
+    }
+    .profile_image_self img {
+        height: 40px;
+    }
+    .post_form_value form {
+        height: 180px;
+    }
+    .post_form_value textarea {
+        font-size: .7em;
+        height: 40%;
+    }
+    .post_form_value_footer .characters_counter {
+        margin: 10px;
+    }
+    .post_form_value_footer .post_create {
+        height: 2rem;
     }
 }
 
@@ -874,10 +941,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: fit-content;
     margin-bottom: 10px;
     display: flex;
+    position: relative;
 }
 .post_img_col {
     padding: 8px 12px;
     width: fit-content;
+}
+.post_img_col img {
+    height: 48px;
 }
 .post_main_col {
     display: flex;
@@ -902,10 +973,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .post_main_col_body {
     height: 100%;
-    padding: 10px;
+    padding: 8px 16px 10px;
 }
 .post_main_col_body p {
     color: var(--white);
+}
+
+@media (max-width: 464px) {
+    .post_main_col_head {
+        font-size: .9em;
+    }
+    .post_img_col img {
+        height: 36px;
+    }
+    .post_main_col {
+        width: 79%;
+    }
 }
 
 
@@ -933,6 +1016,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .faq-element {
     position: relative;
+    cursor: pointer;
     display: block;
     border: 4px solid var(--box);
     background-color: var(--card_box);
@@ -946,7 +1030,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin: 10px;
 }
 .faq-question {
-    cursor: pointer;
     font-weight: bold;
 }
 .faq-element ion-icon {
@@ -1190,7 +1273,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     box-shadow:2px 3px 5px #999;
     position: fixed;
     z-index: 9;
-    width: 44rem;
+    width: 80%;
     height: 11rem;
     border: 2px solid var(--border);
 }
@@ -1208,6 +1291,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .form_value_change_pw button {
     margin-top: 10px;
     width: 100%;
+    height: 2.5rem;
 }
 .popup_pw_buttons {
     display: grid;
@@ -1228,4 +1312,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     left: 0;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 761px) {
+    .form_value_change_pw button {
+        height: 2rem;
+    }
+    .form_value_change_pw {
+        padding: 30px 20px;
+    }
+    .change_password_popup {
+        height: 8rem;
+    }
 }

@@ -23,6 +23,11 @@
             </div>
             <div class="user-info">
                 <ion-icon name="text-outline"></ion-icon>
+                <label for="">Ingame rank</label>
+                <p>{{ viewuser['ingame_rank'] }}</p>
+            </div>
+            <div class="user-info">
+                <ion-icon name="text-outline"></ion-icon>
                 <label for="">Esports Team</label>
                 <p>{{ viewuser['esport_team'] }}</p>
             </div>
@@ -64,7 +69,11 @@
             {% endfor %}
             {% if not userposts %}
                 <h3 class="noposts">
-                    This user has not created any posts yet!
+                    {% if result['username'] == viewuser['username'] %}
+                       You haven't created any posts yet!
+                    {% else %} 
+                        This user has not created any posts yet!
+                    {% endif %}
                 </h3>
             {% endif %}
         </div>

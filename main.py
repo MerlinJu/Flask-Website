@@ -155,7 +155,7 @@ def get_public_details():
     with create_connection() as connection:
         with connection.cursor() as cursor:
             sql = """SELECT 
-            username, acc_creation, pro_game, esport_team, esport_org, profile_pic
+            username, acc_creation, pro_game, ingame_rank, esport_team, esport_org, profile_pic
             FROM users WHERE id = %s"""
             values = (request.args['id'])
             cursor.execute(sql, values)
@@ -292,7 +292,7 @@ def send_email():
             result = cursor.fetchone()
             if result:
                 # send confirmation email
-                return redirect('/ver_forget_password')
+                return redirect('/ver_forget_password?email='+request.form['email'])
             else:
                 flash('email not found!')
                 return redirect('/req_forget_password')
@@ -306,7 +306,7 @@ def ver_forget_password():
             print('test')
             session['activity'] = 'resetting password'
             print(session)
-            return redirect('/forget_password')
+            return redirect('/forget_password?email='+request.args['email'])
 
         else:
             return render_template('ver_forget_password.html')
@@ -319,15 +319,18 @@ def forgot_password():
         with create_connection() as connection:
             with connection.cursor() as cursor:
                 if request.form['new_password'] == request.form['new_conf_password']:
-                    sql = """UPDATE users SET password = %s 
-                    WHERE email = %s"""
-                    values = (request.form['new_password'], request.args['email'])
-                    cursor.execute(sql, values)
-                    connection.commit()
-                    return redirect('/')
-                
-                flash('wrong Info!')
-                return redirect('/')
+                    if secure_password(request.form['new_password']):
+                        sql = """UPDATE users SET password = %s 
+                        WHERE email = %s"""
+                        values = (request.form['new_password'], request.args['email'])
+                        cursor.execute(sql, values)
+                        connection.commit()
+                        return redirect('/')
+                    else:
+                        flash('Insecure Password!')
+                        return redirect('/forget_password?email='+request.args['email'])
+                flash('Passwords not matching!')
+                return redirect('/forget_password?email='+request.args['email'])
     elif 'resetting password' in session['activity']:
         return render_template('forget_password.html')
     else:
@@ -458,13 +461,15 @@ def edit_profile():
                     sql = """UPDATE users SET
                     username = %s,
                     pro_game = %s,
+                    ingame_rank = %s,
                     esport_team = %s,
-                    esport_org = %s,
+                    esport_org = %s
                     WHERE id = %s
                     """
                     values = (
                         request.form['username'],
                         request.form['pro_game'],
+                        request.form['ingame_rank'],
                         request.form['esport_team'],
                         request.form['esport_org'],
                         session['id']
