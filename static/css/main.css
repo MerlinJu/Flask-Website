@@ -991,6 +991,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+.posts_block::-webkit-scrollbar {
+    width: 0.5em; /* Set the width of the scroll bar */
+    height: 0.5em; /* Set the height of the scroll bar */
+}
+   
+.posts_block::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Set the color of the scroll thumb */
+    border-radius: 10px; /* Set the border radius of the scroll thumb */
+    border: solid 3px transparent;
+}
+   
+::-webkit-scrollbar-button {
+    border-width: 8px;
+    border-color: transparent;
+}
+   
+.posts_block::-webkit-scrollbar-track {
+    background-color: transparent; /* Set the color of the scroll track */
+}
 
 
 
