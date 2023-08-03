@@ -591,23 +591,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .edit_profile{
     position: relative;
     text-decoration: none;
-    width: 11rem;
-    height: 2.3rem;
+    padding: 14px 18px;
+    white-space: nowrap;
     transition: all 0.3s ease-in;
 }
 @media (max-width: 731px) {
     .user-footer .edit_profile{
         width: 220px;
     }
-}
-.edit_profile a {
-    text-decoration: none;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    transition: all 0.3s ease-in;
 }
 .profile_hr {
     max-width: 42rem;
@@ -1161,7 +1152,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 600;
     font-size: 1.3em;
     float: left;
-    height: 800px;
+    height: 100vh;
 }
 .settings_tabs_section h2 {
     padding-left: 34px;
@@ -1214,7 +1205,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 600;
     font-size: 1.3em;
     float: right;
-    height: 800px;
+    height: 100vh;
 }
 .sector_hr {
     border: .5px solid var(--border);
@@ -1248,9 +1239,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    .settings_inputbox {
-        width: 80%;
-    }
 }
 .settings_inputbox_parent label {
     background-color: var(--section2);
@@ -1278,12 +1266,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 0;
     border-radius: 10px;
     font-size: .8em;
-}
-@media (max-width: 761px) {
-    .settings_button {
-        width: 60%;
-        font-size: .6em;
-    }
 }
 
 .change_password_popup {
@@ -1343,4 +1325,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .change_password_popup {
         height: 8rem;
     }
+    .change_pw_button {
+        width: 60%;
+        font-size: .6em;
+    }
+}
+
+
+
+/* Post view page */
+.post_view-container {
+    padding: 20px;
 }

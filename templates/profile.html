@@ -12,7 +12,7 @@
                 <p class="user-headline-input at_sign">@</p><input type="text" name="username" class="user-headline-input user-headline-username" value="{{ viewuser['username'] }}">
             </div>
             {% if result['username'] == viewuser['username'] %}
-                <button class="button prim_button edit_profile"><a href="/edit_profile?id={{ session['id'] }}">Edit Profile</a></button>
+                <a class="button prim_button edit_profile" href="/edit_profile?id={{ session['id'] }}">Edit Profile</a>
             {% endif %}
         </div>
         <div class="user-values">

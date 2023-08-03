@@ -161,6 +161,63 @@ def get_public_details():
             cursor.execute(sql, values)
             result = cursor.fetchone()
             return result
+        
+
+# Likes handling
+@app.route('/like_handling')
+def like_handling():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = """SELECT * FROM likes
+            WHERE post_id = %s AND user_id = %s"""
+            values = (
+                request.form['post_id'],
+                get_current_user()['id']
+            )
+            cursor.execute(sql, values)
+            result = cursor.fetchall()
+            if result:
+                return False
+            
+            return True
+
+@app.route('/like')
+def like():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = """INSERT INTO likes
+            (post_id, user_id)
+            VALUES (%s, %s)"""
+            values = (
+                request.form['post_id'],
+                get_current_user()['id']
+            )
+            cursor.execute(sql, values)
+            return 
+
+@app.route('/unlike')   
+def unlike():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = """DELETE FROM likes
+            WHERE post_id = %s AND user_id = %s"""
+            values = (
+                request.form['post_id'],
+                get_current_user()['id']
+            )
+            cursor.execute(sql, values)
+            return 
+        
+def update_likes():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = """SELECT * FROM likes WHERE post_id = %s"""
+            values = (
+                request.args['post_id']
+            )
+            cursor.execute(sql, values)
+            count = cursor.rowcount
+            return count
 
 
 
@@ -431,9 +488,6 @@ def post_view():
             return render_template('post_view.html', result=get_current_user(), post=post)
         else:
             return redirect('/')
-
-
-
 
 @app.route('/profile')
 def account_details():
