@@ -164,7 +164,7 @@ def get_public_details():
         
 
 # Likes handling
-@app.route('/like_handling')
+@app.route('/like_handling', methods = ['POST', 'GET'])
 def like_handling():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -177,9 +177,9 @@ def like_handling():
             cursor.execute(sql, values)
             result = cursor.fetchall()
             if result:
-                return False
+                return redirect('/unlike?post_id='+request.form['post_id'])
             
-            return True
+            return redirect('/like?post_id='+request.form['post_id'])
 
 @app.route('/like')
 def like():
@@ -189,11 +189,12 @@ def like():
             (post_id, user_id)
             VALUES (%s, %s)"""
             values = (
-                request.form['post_id'],
+                request.args['post_id'],
                 get_current_user()['id']
             )
             cursor.execute(sql, values)
-            return 
+            connection.commit()
+            return redirect('/update_likes?post_id='+request.args['post_id'])
 
 @app.route('/unlike')   
 def unlike():
@@ -202,22 +203,34 @@ def unlike():
             sql = """DELETE FROM likes
             WHERE post_id = %s AND user_id = %s"""
             values = (
-                request.form['post_id'],
+                request.args['post_id'],
                 get_current_user()['id']
             )
             cursor.execute(sql, values)
-            return 
+            connection.commit()
+            return redirect('/update_likes?post_id='+request.args['post_id'])
         
+@app.route('/update_likes')
 def update_likes():
     with create_connection() as connection:
         with connection.cursor() as cursor:
-            sql = """SELECT * FROM likes WHERE post_id = %s"""
-            values = (
-                request.args['post_id']
-            )
-            cursor.execute(sql, values)
-            count = cursor.rowcount
-            return count
+            sql_select = """SELECT post_id, likes FROM post_likes_view WHERE post_id = %s"""
+            values = (int(request.args['post_id']),)
+            cursor.execute(sql_select, values)
+            row = cursor.fetchone()
+
+            if row:
+                sql_update = """UPDATE posts SET likes = %s WHERE post_id = %s"""
+                update_values = (
+                    row['likes'], 
+                    row['post_id']
+                    )
+                cursor.execute(sql_update, update_values)
+                connection.commit()
+                return redirect('/')
+            else:
+                return redirect('/')
+
 
 
 
@@ -232,11 +245,12 @@ def main_page():
         if request.method == 'POST':
             with create_connection() as connection:
                 with connection.cursor() as cursor:
-                    sql = "INSERT INTO posts (user_id, content, post_time) VALUES (%s, %s, %s)"
+                    sql = "INSERT INTO posts (user_id, content, post_time, likes) VALUES (%s, %s, %s, %s)"
                     values = (
                         session['id'],
                         request.form["content"],
-                        datetime.now()
+                        datetime.now(),
+                        int(0)
                     )
                     cursor.execute(sql, values)
                     result = connection.commit()
@@ -394,7 +408,7 @@ def forgot_password():
         return redirect('/')
 
 
-@app.route('/contact')
+@app.route('/contact', methods = ["GET", "POST"] )
 def contact():
     if 'logged_in' in session:
         result = get_current_user()
@@ -499,9 +513,7 @@ def account_details():
         userposts = get_user_posts(request.args['id'])
         if userposts:
             userposts = reversed(userposts)
-            return render_template('/profile.html', result=get_current_user(), viewuser=get_public_details(), userposts=userposts)
-        else:
-            return render_template('/profile.html', result=get_current_user(), viewuser=get_public_details(), userposts=userposts)
+        return render_template('/profile.html', result=get_current_user(), viewuser=get_public_details(), userposts=userposts)
     else:
         return redirect('/')
 

@@ -528,9 +528,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         justify-content: center;
         align-items: center;
     }
-    .user-edit-heading-username input {
-        width: 25%;
-    }
 }
 .user-headline {
     position: relative;
@@ -636,7 +633,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .user-edit-heading-username {
     display: flex;
-    padding-right: 20px;
 }
 .user-headline-input {
     position: relative;
@@ -982,6 +978,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+.post_actions {
+    display: flex;
+    font-size: .9em;
+    margin-bottom: .8rem;
+}
+.post_actions form {
+    box-sizing: content-box;
+}
+.post_actions span {
+    color: var(--black);
+    padding-top: 4px;
+    pointer-events: none;
+    margin-left: -28%;
+}
+.post_actions form button {
+    display: block;
+    border: none;
+    outline: none;
+    background-color: var(--green-inside);
+    border-radius: 8px;
+    padding: 4px 28px 4px 8px;
+    cursor: pointer;
+    width: 100%;
+}
+.post_actions_form {
+    display: flex;
+}
+
+
+
 .posts_block::-webkit-scrollbar {
     width: 0.5em; /* Set the width of the scroll bar */
     height: 0.5em; /* Set the height of the scroll bar */
@@ -998,7 +1024,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-color: transparent;
 }
    
-.posts_block::-webkit-scrollbar-track {
+.posts_block::-webkit-scrollbar-corner {
     background-color: transparent; /* Set the color of the scroll track */
 }
 
@@ -1054,7 +1080,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 .ticket-form_section {
-    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1137,7 +1162,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .contact_button {
     width: 160px;
     height: 40px;
-    margin-left: 20px;
+}
+
+@media (max-width: 400px) {
+    .contact_inputbox_parent label {
+        font-size: .8em;
+    }
 }
 
 
@@ -1337,3 +1367,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .post_view-container {
     padding: 20px;
 }
+

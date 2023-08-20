@@ -82,9 +82,11 @@
                                     {{ posts['content'] }}
                                 </p>
                             </div>
-                            <div>
-                                <form method="POST" action="/like_handling">
-                                    <button tpye="submit" value=""
+                            <div class="post_actions">
+                                <form method="POST" action="/like_handling" class="post_actions_form">
+                                    <input type="hidden" name="post_id" value="{{ posts['post_id'] }}">
+                                    <button type="submit" name="Value">Like</button>
+                                    <span class="likes_count"> {{ posts.likes }} </span>
                                 </form>
                             </div>
                         </div>
