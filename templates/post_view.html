@@ -1,5 +1,9 @@
 {% extends "_layout.html" %}
 
+{% block title %}
+    Post
+{% endblock %}
+
 {% block content %}
 
 <section class="main-section post_view-container">
@@ -7,14 +11,14 @@
 
         <div class="post">
             <div class="post_img_col">
-                <img class="profile_img" src="{{ post[0]['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
+                <img class="profile_img" src="{{ post['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
             </div>
             <div class="post_main_col">
                 <div class="post_main_col_head">
-                    <p class="post_username">{{ post[0]['username'] }}</p>
+                    <p class="post_username">{{ post['username'] }}</p>
                     <p class="post_posttime">
-                        {% if post[0]['post_time'] %}
-                            {{ post[0]['post_time'] | format_datetime }}
+                        {% if post['post_time'] %}
+                            {{ post['post_time'] | format_datetime }}
                         {% else %}
                             No post time available
                         {% endif %}
@@ -22,8 +26,27 @@
                 </div>
                 <div class="post_main_col_body">
                     <p>
-                        {{ post[0]['content'] }}
+                        {{ post['content'] }}
                     </p>
+                </div>
+                <div class="post_actions">
+                    <form method="POST" action="/like_handling" class="post_actions_form">
+                        <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+                        <button type="submit" name="Value">Like</button>
+                        <span class="like_span"> {{ post.likes }} </span>
+                    </form>
+                    {% if result['id'] == post['user_id'] %}
+                        <form method="POST" action="/delete_post" class="post_actions_form">
+                            <input type="hidden" name="user_id" value="{{ post['user_id'] }}">
+                            <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+                            <button class="delete_button" type="submit" name="Value">Delete</button>
+                        </form>
+                        <form method="POST" action="/update_post" class="post_actions_form">
+                            <input type="hidden" name="user_id" value="{{ post['user_id'] }}">
+                            <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+                            <button class="edit_button" type="submit" name="Value">Edit</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

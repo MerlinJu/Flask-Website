@@ -19,8 +19,9 @@ html {
     --sec_button_hover: #96928d;
     --grey: #4e4d4d;
     --green-inside: #83eb6a;
-    --green-outside: #54ca37;
+    --green-outside: #5bcf3e;
     --red: #e13838;
+    --red-outside: #d72828;
 }
 * {
     margin: 0;
@@ -103,7 +104,6 @@ footer p {
     text-align: center;
     margin-top: 10px;
 }
-
 
 
 /* Inputbox */
@@ -672,9 +672,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .home_new_headertext {
     position: relative;
-    left: 70px;
-    top: 60px;
-    width: 640px;
+    top: 4rem;
+    left: 3rem;
+    width: 95%;
     color: #fff;
     font-size: 3em;
     font-weight: 500;
@@ -687,6 +687,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center;
     font-size: 2.3em;
     padding: 22px 12px 28px;
+}
+.daily_report h4 {
+    color: var(--red);
+    text-align: center;
+    font-size: .9em;
 }
 .report_blocks_container {
     position: relative;
@@ -929,6 +934,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 10px;
     display: flex;
     position: relative;
+    background-color: var(--box);
 }
 .post_img_col {
     padding: 8px 12px;
@@ -986,7 +992,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .post_actions form {
     box-sizing: content-box;
 }
-.post_actions span {
+.post_actions .like_span {
     color: var(--black);
     padding-top: 4px;
     pointer-events: none;
@@ -1001,9 +1007,68 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 4px 28px 4px 8px;
     cursor: pointer;
     width: 100%;
+    transition: all 0.3s ease-in;
+}
+.post_actions form button:hover {
+    box-shadow: 0 0 7px var(--shadow);
+}
+.post_actions form .delete_button {
+    background-color: var(--red);
+    margin-left: 1rem;
+    padding: 4px 20px;
+}
+.post_actions form .delete_button:hover {
+    background-color: var(--red-outside);
+}
+.post_actions form .edit_button {
+    background-color: var(--navbar);
+    margin-left: 1rem;
+    padding: 4px 20px;
+}
+.post_actions form .edit_button:hover {
+    background-color: var(--navbar_hover);
+}
+.post_actions p {
+    margin-left: 1rem;
+    padding-top: 4px;
 }
 .post_actions_form {
     display: flex;
+}
+
+.post_actions .submit_button {
+    padding: 4px 20px;
+    background-color: var(--green-inside);
+    transition: all 0.3s ease-in;
+}
+.post_actions .submit_button:hover {
+    background-color: var(--green-outside);
+    box-shadow: 0 0 7px var(--shadow);
+}
+.post_actions .cancel_button {
+    padding: 4px 20px;
+    background-color: var(--red);
+    transition: all 0.3s ease-in;
+    margin-left: 1rem;
+}
+.post_actions .cancel_button:hover {
+    background-color: var(--red-outside);
+    box-shadow: 0 0 7px var(--shadow);
+}
+.post_actions .cancel_button a {
+    text-decoration: none;
+    color: var(--black);
+}
+.post_box form textarea{
+    background-color: var(--textarea);
+    color: var(--white);
+    outline: none;
+    border: none;
+    font-size: .9em;
+    border-radius: 9px;
+    width: 100%;
+    padding: 10px 8px;
+    box-shadow: 0 0 8px var(--shadow);
 }
 
 
@@ -1196,8 +1261,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     display: flex;
     margin-bottom: 10px;
+    padding: 6px;
     height: fit-content;
     align-items: center;
+    cursor: pointer;
+}
+.settings_tabs .active {
+    background-color: var(--box);
+    border-radius: 10px;
 }
 .settings_tab ion-icon {
     margin-right: 11px;
@@ -1217,10 +1288,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding-left: 14px;
     }
     .settings_tabs_section {
-        font-size: .8em;
+        font-size: .7em;
     }
     .settings_tabs {
-        padding-left: 10px;
+        padding: 0 4px;
     }
 }
 

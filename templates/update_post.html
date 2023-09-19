@@ -1,0 +1,49 @@
+{% extends "_layout.html" %}
+
+{% block title %}
+    Edit Post
+{% endblock %}
+
+{% block content %}
+
+<section class="main-section post_view-container">
+    <div class="post_box">
+
+        <form method="POST" action="/update_post" class="post">
+            <div class="post_img_col">
+                <img class="profile_img" src="{{ post['profile_pic'] or 'static/images/style-images/avatar.png' }}" height="48" alt="profile">
+            </div>
+            <div class="post_main_col">
+                <div class="post_main_col_head">
+                    <p class="post_username">{{ post['username'] }}</p>
+                    <p class="post_posttime">
+                        {% if post['post_time'] %}
+                            {{ post['post_time'] | format_datetime }}
+                        {% else %}
+                            No post time available
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="post_main_col_body">
+                    <textarea type="text" name="content" id="text" placeholder="Enter your text here..." maxlength="250" required>{{ post['content'] }}</textarea>
+                </div>
+                
+                <div class="post_actions">    
+                    <div class="post_actions_form">
+                        <input type="hidden" name="user_id" value="{{ post['user_id'] }}">
+                        <input type="hidden" name="post_id" value="{{ post['post_id'] }}">
+                        <button class="button submit_button" type="submit" name="Value">Submit</button>
+                        <button class="button cancel_button"><a href="/">Cancel</a></button>
+                        <p><span id="counter">250</span></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</section>
+
+
+
+{% endblock %}

@@ -147,7 +147,7 @@ def get_post_byid(id):
     with create_connection() as connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM posts JOIN users ON posts.user_id = users.id WHERE post_id = %s", (id,))
-            post = cursor.fetchall()
+            post = cursor.fetchone()
             return post
 
 
@@ -227,9 +227,13 @@ def update_likes():
                     )
                 cursor.execute(sql_update, update_values)
                 connection.commit()
-                return redirect('/')
+                # Redirect back to the previous page
+                referer = request.headers.get('Referer')
+                return redirect(referer)
             else:
-                return redirect('/')
+                # Redirect back to the previous page
+                referer = request.headers.get('Referer')
+                return redirect(referer)
 
 
 
@@ -258,9 +262,7 @@ def main_page():
                     
         else:
             result = get_current_user()
-            allposts = getall_posts()
-            allusers = getall_users()
-            return render_template('home_page.html', result=result ,allposts=allposts, allusers=allusers)
+            return render_template('home_page.html', result = result, allposts = getall_posts(), allusers = getall_users())
                 
     else:
         return render_template('home_page.html')
@@ -269,6 +271,8 @@ def main_page():
 
 @app.route('/signup', methods = ['POST', 'GET'] )
 def signup():
+    if 'logged_in' in session:
+        return redirect('/')
     if request.method == 'POST':
         if email_already_exists(request.form['email']):
             flash('Email already in use!')
@@ -301,7 +305,7 @@ def signup():
                 flash('Too young or too old!')
                 return redirect('/signup')   
         else:
-            flash('Insecure Password!')
+            flash('Insecure Password! (ex: Aa3)')
             return redirect('/signup')  
           
     else:
@@ -309,6 +313,8 @@ def signup():
 
 @app.route('/login', methods = ["POST", "GET"])
 def login():
+    if 'logged_in' in session:
+        return redirect('/')
     session['activity'] = ''
     if request.method == "POST":
         with create_connection() as connection:
@@ -374,9 +380,7 @@ def ver_forget_password():
         return redirect('/')
     else:
         if request.method == "POST" and request.form['ver_code'] == '12345':
-            print('test')
             session['activity'] = 'resetting password'
-            print(session)
             return redirect('/forget_password?email='+request.args['email'])
 
         else:
@@ -480,15 +484,49 @@ def update_appearance():
 def update_language():
     return redirect('/')
 
-@app.route('/update_post')
+@app.route('/update_post', methods = ["GET", "POST"])
 def update_post():
     if 'logged_in' in session:
         result = get_current_user()
-        with create_connection() as connection:
-            with connection.cursor() as cursor:
-                sql = """UPDATE posts SET
-                """
-                pass
+        post_id = request.form['post_id']
+        post_user_id = request.form['user_id']
+        if int(result['id']) == int(post_user_id):
+            try:
+                with create_connection() as connection:
+                    with connection.cursor() as cursor:
+                        sql = """UPDATE posts SET content = %s 
+                        WHERE post_id = %s"""
+                        values = (
+                            request.form['content'],
+                            post_id
+                        )
+                        
+                        cursor.execute(sql, values)
+                        connection.commit()
+                        return redirect('/')
+                    
+            except:
+                return render_template('update_post.html', post=get_post_byid(post_id), result=get_current_user())
+
+@app.route('/delete_post', methods = ["GET", "POST"])
+def delete_post():
+    if 'logged_in' in session:
+        result = get_current_user()
+        post_user_id = request.form['user_id']
+        if int(result['id']) == int(post_user_id):
+            with create_connection() as connection:
+                with connection.cursor() as cursor:
+                    sql = """DELETE FROM posts WHERE user_id = %s 
+                    AND post_id = %s"""
+                    values = (
+                        request.form['user_id'],
+                        request.form['post_id']
+                    )
+                    cursor.execute(sql, values)
+                    connection.commit()
+                    return redirect('/')
+
+        return redirect('/')
 
 @app.route('/post_view')
 def post_view():
@@ -498,7 +536,6 @@ def post_view():
             result = cursor.fetchone()
         if 'logged_in' in session and result:
             post = get_post_byid(request.args['post_id'])
-            print(post)
             return render_template('post_view.html', result=get_current_user(), post=post)
         else:
             return redirect('/')

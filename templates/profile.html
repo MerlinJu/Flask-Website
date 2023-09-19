@@ -1,5 +1,9 @@
 {% extends "_layout.html" %}
 
+{% block title %}
+    Your Profile
+{% endblock %}
+
 {% block content %}
 
 <section class="main-section main-section_card">
@@ -17,22 +21,22 @@
         </div>
         <div class="user-values">
             <div class="user-info">
-                <ion-icon name="text-outline"></ion-icon>
+                <ion-icon name="game-controller-outline"></ion-icon>
                 <label for="">Pro Game</label>
                 <p>{{ viewuser['pro_game'] }}</p>
             </div>
             <div class="user-info">
-                <ion-icon name="text-outline"></ion-icon>
+                <ion-icon name="medal-outline"></ion-icon>
                 <label for="">Ingame rank</label>
                 <p>{{ viewuser['ingame_rank'] }}</p>
             </div>
             <div class="user-info">
-                <ion-icon name="text-outline"></ion-icon>
+                <ion-icon name="cube-outline"></ion-icon>
                 <label for="">Esports Team</label>
                 <p>{{ viewuser['esport_team'] }}</p>
             </div>
             <div class="user-info">
-                <ion-icon name="mail-outline"></ion-icon>
+                <ion-icon name="cube-outline"></ion-icon>
                 <label for="">Esports Organisation</label>
                 <p>{{ viewuser['esport_org'] }}</p>
             </div>

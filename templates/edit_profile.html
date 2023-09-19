@@ -1,5 +1,9 @@
 {% extends "_layout.html" %}
 
+{% block title %}
+    Edit your Profile
+{% endblock %}
+
 {% block content %}
 
 <section class="main-section main-section_card">
@@ -17,18 +21,22 @@
         </div>
         <div class="user-values">
             <div class="user-info">
+                <ion-icon name="game-controller-outline"></ion-icon>
                 <label for="">Pro Game</label>
                 <input type="text" name="pro_game" value="{{ public_details['pro_game'] }}" required>
             </div>
             <div class="user-info">
+                <ion-icon name="medal-outline"></ion-icon>
                 <label for="">Ingame Rank</label>
                 <input type="text" name="ingame_rank" value="{{ public_details['ingame_rank'] }}" required>
             </div>
             <div class="user-info">
+                <ion-icon name="cube-outline"></ion-icon>
                 <label for="">Esports Team</label>
                 <input type="text" name="esport_team" value="{{ public_details['esport_team'] }}" required>
             </div>
             <div class="user-info">
+                <ion-icon name="cube-outline"></ion-icon>
                 <label for="">Esports Organisation</label>
                 <input type="text" name="esport_org" value="{{ public_details['esport_org'] }}" required>
             </div>
@@ -40,5 +48,8 @@
     </form>
 
 </section>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 {% endblock %}

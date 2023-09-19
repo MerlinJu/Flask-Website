@@ -1,5 +1,9 @@
 {% extends "_layout.html" %}
 
+{% block title %}
+    Homepage
+{% endblock %}
+
 {% block content %}
 
 <section class="main-section">
@@ -7,6 +11,7 @@
     <div class="home_head_section">
         <div class="daily_report">
             <h2>Daily Report</h2>
+            <h4>!These 3 are not yet implemented!</h4>
             <div class="report_blocks_container">
                 <div class="new_messages report_block">
                     <h3>Messages</h3>
@@ -86,8 +91,15 @@
                                 <form method="POST" action="/like_handling" class="post_actions_form">
                                     <input type="hidden" name="post_id" value="{{ posts['post_id'] }}">
                                     <button type="submit" name="Value">Like</button>
-                                    <span class="likes_count"> {{ posts.likes }} </span>
+                                    <span class="like_span"> {{ posts.likes }} </span>
                                 </form>
+                                {% if result['id'] == posts['user_id'] %}
+                                    <form method="POST" action="/delete_post" class="post_actions_form">
+                                        <input type="hidden" name="user_id" value="{{ posts['user_id'] }}">
+                                        <input type="hidden" name="post_id" value="{{ posts['post_id'] }}">
+                                        <button class="delete_button" type="submit" name="Value">Delete</button>
+                                    </form>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -103,7 +115,7 @@
     {% else %}
         <section class="main-section">
             <div class="home_new_head">
-                <h1 class="home_new_headertext">The new Way of finding your future proffesional teammates</h1>
+                <h1 class="home_new_headertext">The new way of finding your future professional teammates</h1>
             </div>
         </section>
 
