@@ -10,7 +10,7 @@ app.secret_key = '!SeCrEt__KeY.mERLIN13542!'
 DEFAULTIMG = 'static/images/style-images/avatar.png'
 
 
-
+# Function to create a database connection
 def create_connection():
     return pymysql.connect(
         host="localhost",
@@ -21,7 +21,7 @@ def create_connection():
         cursorclass=pymysql.cursors.DictCursor
     )
 
-# Default profile Image
+# Function to set the default profile picture for a user
 def set_default_profilepic():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -34,7 +34,7 @@ def set_default_profilepic():
             connection.commit()
             return
 
-# Password Security      
+# Function to hash a password for security
 def hash_password(password):
     salt = bcrypt.gensalt(rounds=12)
 
@@ -43,7 +43,8 @@ def hash_password(password):
 
     # Return the hashed password as a utf-8 encoded string
     return hashed_password.decode('utf-8')
-        
+
+# Function to verify a password
 def verify_password(try_password, hashed_password):
     # Verify if the provided password matches the hashed password
     return bcrypt.checkpw(try_password.encode('utf-8'), hashed_password.encode('utf-8'))
@@ -51,6 +52,8 @@ def verify_password(try_password, hashed_password):
 
 
 # Signup Checks
+
+# Function to check if a phone number is valid
 def is_phone_number(input_string):
     # Remove spaces and non-digit characters from the input string
     input_string = input_string.replace(" ", "").replace("-", "")
@@ -61,6 +64,7 @@ def is_phone_number(input_string):
     else:
         return False
     
+# Function to check if an email already exists in the database
 def email_already_exists(email):
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -68,6 +72,7 @@ def email_already_exists(email):
             result = cursor.fetchone()
             return result is not None
         
+# Function to check if a birthdate is a valid age
 def is_valid_age(birthday):
     # Do not need to check if Date is valid, because 10 years old is 
     # always a valid date and 80 years ago is also always a valid date, 
@@ -81,6 +86,7 @@ def is_valid_age(birthday):
     except ValueError:
         return False
         
+# Function to check if a password meets security requirements
 def secure_password(password):
     lower_case = re.search('[a-z]', password)
     upper_case = re.search('[A-Z]', password)
@@ -94,6 +100,8 @@ def secure_password(password):
 
 
 # USER AUTHENTICATION & DATA
+
+# Function to get the current user's data
 def get_current_user():
     if 'logged_in' in session and 'id' in session:
         current_user_id = session['id']
@@ -105,6 +113,7 @@ def get_current_user():
     else:
         return None
     
+# Function to get the hashed password by email
 def get_userpw_by_email(email):
     if 'logged_in' in session:
         return
@@ -114,6 +123,7 @@ def get_userpw_by_email(email):
             password = cursor.fetchone()
             return password
     
+# Function to check if the current user is an admin
 def is_admin():
     user = get_current_user()   # getting the current user data
     if user and 'role' in session and user['role'] == 'Admin' and 'Admin' in session['role']:
@@ -121,6 +131,7 @@ def is_admin():
     else:
         return False
     
+# Function to get all users from the database
 def getall_users():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -128,6 +139,7 @@ def getall_users():
             result = cursor.fetchall()
             return result
 
+# Function to get all posts from the database
 def getall_posts():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -136,6 +148,7 @@ def getall_posts():
             allposts = reversed(allposts)
             return allposts
         
+# Function to get posts by a specific user
 def get_user_posts(id):
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -143,6 +156,7 @@ def get_user_posts(id):
             userposts = cursor.fetchall()
             return userposts
 
+# Function to get a post by its ID
 def get_post_byid(id):
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -150,7 +164,7 @@ def get_post_byid(id):
             post = cursor.fetchone()
             return post
 
-
+# Function to get public details of a user
 def get_public_details():
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -181,6 +195,7 @@ def like_handling():
             
             return redirect('/like?post_id='+request.form['post_id'])
 
+# Function for liking a post
 @app.route('/like')
 def like():
     with create_connection() as connection:
@@ -196,6 +211,7 @@ def like():
             connection.commit()
             return redirect('/update_likes?post_id='+request.args['post_id'])
 
+# Function for unliking a post
 @app.route('/unlike')   
 def unlike():
     with create_connection() as connection:
@@ -210,6 +226,7 @@ def unlike():
             connection.commit()
             return redirect('/update_likes?post_id='+request.args['post_id'])
         
+# Function to update the number of likes on a post
 @app.route('/update_likes')
 def update_likes():
     with create_connection() as connection:
@@ -236,13 +253,12 @@ def update_likes():
                 return redirect(referer)
 
 
-
-
+# Template filter to format datetime
 @app.template_filter('format_datetime')
 def format_datetime(value, format='%Y-%m-%d %H:%M:%S'):
     return value.strftime(format)
 
-
+# Main page route
 @app.route('/', methods = ['POST', 'GET'] )
 def main_page():
     if 'logged_in' in session:
@@ -268,7 +284,7 @@ def main_page():
         return render_template('home_page.html')
     
 
-
+# Signup route
 @app.route('/signup', methods = ['POST', 'GET'] )
 def signup():
     if 'logged_in' in session:
@@ -311,6 +327,7 @@ def signup():
     else:
         return render_template('signup.html')
 
+# Login route
 @app.route('/login', methods = ["POST", "GET"])
 def login():
     if 'logged_in' in session:
@@ -344,18 +361,21 @@ def login():
     else:
         return render_template('login.html')
 
+# Logout route
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect('/')
 
-# FORGET PASSWORD AUTHENTICATION
+
+# Route to request forget password
 @app.route('/req_forget_password', methods = ["POST", "GET"])
 def req_forget_password():
     if 'logged_in' in session:
         return redirect('/')
     return render_template('req_forget_password.html')
 
+# Route to send email for forget password
 @app.route('/forget_password_send_email', methods = ["POST", "GET"])
 def send_email():
     with create_connection() as connection:
@@ -374,6 +394,7 @@ def send_email():
                 flash('email not found!')
                 return redirect('/req_forget_password')
 
+# Route to verify forget password request
 @app.route('/ver_forget_password', methods = ["POST", "GET"])
 def ver_forget_password():
     if 'logged_in' in session:
@@ -386,6 +407,7 @@ def ver_forget_password():
         else:
             return render_template('ver_forget_password.html')
 
+# Route to reset forgotten password
 @app.route('/forget_password', methods = ["POST", "GET"])
 def forgot_password():
     if 'logged_in' in session:
@@ -412,6 +434,7 @@ def forgot_password():
         return redirect('/')
 
 
+# Contact route
 @app.route('/contact', methods = ["GET", "POST"] )
 def contact():
     if 'logged_in' in session:
@@ -420,6 +443,7 @@ def contact():
     else:
         return render_template('/contact.html')
 
+# Settings route
 @app.route('/settings', methods = ["POST", "GET"])
 def settings():
     if 'logged_in' in session:
@@ -429,6 +453,8 @@ def settings():
         return redirect('/')
     
 # SETTINGS FORM ACTIONS
+
+# Update personal information route
 @app.route('/update_personal_information', methods = ["GET", "POST"])
 def update_personal_information():
     if request.form['fname'] and request.form['lname'] and request.form['email'] and request.form['phonenumber']:
@@ -457,6 +483,7 @@ def update_personal_information():
     else:
         return redirect('/settings')
 
+# Update password route
 @app.route('/update_password', methods = ["GET", "POST"])
 def update_security():
     if request.form['new_password'] and secure_password(request.form['new_password']):
@@ -476,14 +503,17 @@ def update_security():
     else:
         return redirect('/settings')
 
+# Update appearance route
 @app.route('/update_appearance')
 def update_appearance():
     return redirect('/')
 
+# Update language route
 @app.route('/update_language')
 def update_language():
     return redirect('/')
 
+# Update post route
 @app.route('/update_post', methods = ["GET", "POST"])
 def update_post():
     if 'logged_in' in session:
@@ -508,6 +538,7 @@ def update_post():
             except:
                 return render_template('update_post.html', post=get_post_byid(post_id), result=get_current_user())
 
+# Delete post route
 @app.route('/delete_post', methods = ["GET", "POST"])
 def delete_post():
     if 'logged_in' in session:
@@ -528,6 +559,7 @@ def delete_post():
 
         return redirect('/')
 
+# View a post route
 @app.route('/post_view')
 def post_view():
     with create_connection() as connection:
@@ -540,6 +572,7 @@ def post_view():
         else:
             return redirect('/')
 
+# View user profile route
 @app.route('/profile')
 def account_details():
     with create_connection() as connection:
@@ -554,7 +587,7 @@ def account_details():
     else:
         return redirect('/')
 
-
+# Edit user profile route
 @app.route('/edit_profile', methods = ["POST", "GET"])
 def edit_profile():
     if 'logged_in' in session and int(request.args['id']) == int(session['id']):
@@ -588,7 +621,7 @@ def edit_profile():
     else:
         return redirect('/')
     
-
+# Admin panel route
 @app.route('/admin_panel')
 def admin_panel():
     if is_admin():
@@ -599,5 +632,7 @@ def admin_panel():
         return redirect('/')
 
 
+
+# Run the Flask application
 if __name__ == "__main__":
     app.run(debug=True)
